@@ -69,13 +69,14 @@ This project explores how different AI models interpret and execute the same cre
 
 This showcase is hosted on **GitHub Pages** at:
 ```
-https://baney.dev/Trolly-Problem-Learning/ai-ethics-showcase/
+https://baney75.github.io/Trolly-Problem-Learning/
 ```
 
-Each individual experiment is also accessible:
-- ChatGPT: `https://baney.dev/Trolly-Problem-Learning/ChatGPT/`
-- Claude: `https://baney.dev/Trolly-Problem-Learning/Claude/`
-- Gemini: `https://baney.dev/Trolly-Problem-Learning/Gemini/`
+## 🔗 Individual Repositories
+
+- **ChatGPT**: https://github.com/baney75/Trolly-Problem---ChatGPT-5.4
+- **Claude**: https://github.com/baney75/Trolly-Problem---Claude-4.6-Sonnet
+- **Gemini**: https://github.com/baney75/Trolly-Problem---Gemini-3.1-Pro
 
 ## 🎓 Philosophy Concepts
 
