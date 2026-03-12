@@ -1,0 +1,2868 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>The Ethics Lab — Consequentialism & Deontology</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap"
+            rel="stylesheet"
+        />
+        <style>
+            :root {
+                --ink: #0d0d0d;
+                --parchment: #f5f0e8;
+                --cream: #ece6d8;
+                --electric: #ffe600;
+                --neon: #00e5ff;
+                --coral: #ff4d4d;
+                --sage: #7fff9e;
+                --deep: #111318;
+                --panel: #1a1d26;
+                --muted: #8a8fa0;
+                --border: rgba(255, 255, 255, 0.08);
+            }
+            *,
+            *::before,
+            *::after {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+            }
+            html {
+                scroll-behavior: smooth;
+            }
+            body {
+                background: var(--deep);
+                color: var(--parchment);
+                font-family: "DM Sans", sans-serif;
+                font-weight: 300;
+                font-size: 17px;
+                line-height: 1.7;
+                overflow-x: hidden;
+            }
+
+            /* ── SCROLLBAR ── */
+            ::-webkit-scrollbar {
+                width: 4px;
+            }
+            ::-webkit-scrollbar-track {
+                background: var(--deep);
+            }
+            ::-webkit-scrollbar-thumb {
+                background: var(--electric);
+                border-radius: 2px;
+            }
+
+            /* ── TYPOGRAPHY ── */
+            h1,
+            h2,
+            h3,
+            h4 {
+                font-family: "Playfair Display", serif;
+                line-height: 1.15;
+            }
+            .mono {
+                font-family: "DM Mono", monospace;
+            }
+
+            /* ── NAV ── */
+            nav {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                z-index: 100;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 1rem 1.5rem;
+                background: rgba(13, 13, 18, 0.92);
+                backdrop-filter: blur(12px);
+                border-bottom: 1px solid var(--border);
+            }
+            .nav-logo {
+                font-family: "Playfair Display", serif;
+                font-size: 1.1rem;
+                font-style: italic;
+                color: var(--electric);
+                letter-spacing: 0.03em;
+            }
+            .nav-links {
+                display: flex;
+                gap: 1.5rem;
+                list-style: none;
+            }
+            .nav-links a {
+                color: var(--muted);
+                text-decoration: none;
+                font-size: 0.82rem;
+                letter-spacing: 0.08em;
+                text-transform: uppercase;
+                font-weight: 500;
+                transition: color 0.2s;
+            }
+            .nav-links a:hover {
+                color: var(--electric);
+            }
+            @media (max-width: 600px) {
+                .nav-links {
+                    display: none;
+                }
+            }
+
+            /* ── HERO ── */
+            #hero {
+                min-height: 100vh;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-end;
+                padding: 7rem 1.5rem 4rem;
+                position: relative;
+                overflow: hidden;
+            }
+            .hero-grid {
+                position: absolute;
+                inset: 0;
+                background-image:
+                    linear-gradient(
+                        rgba(255, 230, 0, 0.04) 1px,
+                        transparent 1px
+                    ),
+                    linear-gradient(
+                        90deg,
+                        rgba(255, 230, 0, 0.04) 1px,
+                        transparent 1px
+                    );
+                background-size: 48px 48px;
+                animation: gridPan 30s linear infinite;
+            }
+            @keyframes gridPan {
+                from {
+                    background-position: 0 0;
+                }
+                to {
+                    background-position: 48px 48px;
+                }
+            }
+            .hero-glow {
+                position: absolute;
+                top: 10%;
+                right: -10%;
+                width: 600px;
+                height: 600px;
+                border-radius: 50%;
+                background: radial-gradient(
+                    circle,
+                    rgba(0, 229, 255, 0.07) 0%,
+                    transparent 70%
+                );
+                pointer-events: none;
+            }
+            .hero-tag {
+                font-family: "DM Mono", monospace;
+                font-size: 0.75rem;
+                letter-spacing: 0.15em;
+                text-transform: uppercase;
+                color: var(--electric);
+                margin-bottom: 1.25rem;
+                display: flex;
+                align-items: center;
+                gap: 0.6rem;
+            }
+            .hero-tag::before {
+                content: "";
+                display: inline-block;
+                width: 32px;
+                height: 1px;
+                background: var(--electric);
+            }
+            .hero-title {
+                font-size: clamp(3rem, 10vw, 7rem);
+                font-weight: 900;
+                line-height: 0.95;
+                margin-bottom: 0.4rem;
+            }
+            .hero-title span {
+                color: var(--electric);
+                display: block;
+                font-style: italic;
+            }
+            .hero-sub {
+                font-size: clamp(1rem, 2.5vw, 1.3rem);
+                color: var(--muted);
+                margin-top: 1.5rem;
+                max-width: 560px;
+                font-weight: 300;
+            }
+            .hero-sub em {
+                color: var(--neon);
+                font-style: normal;
+            }
+            .hero-cta {
+                display: inline-flex;
+                align-items: center;
+                gap: 0.75rem;
+                margin-top: 2.5rem;
+                padding: 0.9rem 2rem;
+                background: var(--electric);
+                color: var(--ink);
+                font-family: "DM Mono", monospace;
+                font-size: 0.85rem;
+                font-weight: 500;
+                letter-spacing: 0.08em;
+                text-transform: uppercase;
+                text-decoration: none;
+                border: none;
+                cursor: pointer;
+                transition:
+                    transform 0.2s,
+                    box-shadow 0.2s;
+                clip-path: polygon(
+                    8px 0%,
+                    100% 0%,
+                    calc(100% - 8px) 100%,
+                    0% 100%
+                );
+            }
+            .hero-cta:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 8px 30px rgba(255, 230, 0, 0.35);
+            }
+            .scroll-indicator {
+                position: absolute;
+                bottom: 2rem;
+                left: 50%;
+                transform: translateX(-50%);
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 0.4rem;
+                color: var(--muted);
+                font-size: 0.7rem;
+                letter-spacing: 0.1em;
+                text-transform: uppercase;
+                animation: bounce 2s ease-in-out infinite;
+            }
+            .scroll-indicator::after {
+                content: "";
+                width: 1px;
+                height: 40px;
+                background: linear-gradient(
+                    to bottom,
+                    var(--muted),
+                    transparent
+                );
+            }
+            @keyframes bounce {
+                0%,
+                100% {
+                    transform: translateX(-50%) translateY(0);
+                }
+                50% {
+                    transform: translateX(-50%) translateY(6px);
+                }
+            }
+
+            /* ── SECTIONS ── */
+            section {
+                padding: 5rem 1.5rem;
+            }
+            .container {
+                max-width: 900px;
+                margin: 0 auto;
+            }
+            .section-label {
+                font-family: "DM Mono", monospace;
+                font-size: 0.7rem;
+                letter-spacing: 0.18em;
+                text-transform: uppercase;
+                color: var(--electric);
+                margin-bottom: 0.75rem;
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+            }
+            .section-label::after {
+                content: "";
+                flex: 1;
+                height: 1px;
+                background: rgba(255, 230, 0, 0.2);
+            }
+            .section-title {
+                font-size: clamp(2rem, 5vw, 3.2rem);
+                margin-bottom: 1.25rem;
+            }
+
+            /* ── CARD ── */
+            .card {
+                background: var(--panel);
+                border: 1px solid var(--border);
+                padding: 2rem;
+                position: relative;
+                overflow: hidden;
+                transition:
+                    border-color 0.3s,
+                    transform 0.3s;
+            }
+            .card:hover {
+                border-color: rgba(255, 230, 0, 0.3);
+                transform: translateY(-3px);
+            }
+            .card-accent {
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                height: 3px;
+            }
+
+            /* ── THEORY SPLIT ── */
+            .theory-grid {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 1.5rem;
+                margin-top: 3rem;
+            }
+            @media (max-width: 700px) {
+                .theory-grid {
+                    grid-template-columns: 1fr;
+                }
+            }
+            .theory-card {
+                background: var(--panel);
+                border: 1px solid var(--border);
+                padding: 2.5rem 2rem;
+                position: relative;
+                overflow: hidden;
+                transition:
+                    border-color 0.3s,
+                    transform 0.3s;
+                cursor: pointer;
+            }
+            .theory-card:hover {
+                transform: translateY(-4px);
+            }
+            .theory-card.consequentialist {
+                border-top: 4px solid var(--electric);
+            }
+            .theory-card.deontological {
+                border-top: 4px solid var(--neon);
+            }
+            .theory-card:hover.consequentialist {
+                box-shadow: 0 20px 60px rgba(255, 230, 0, 0.1);
+            }
+            .theory-card:hover.deontological {
+                box-shadow: 0 20px 60px rgba(0, 229, 255, 0.1);
+            }
+            .theory-icon {
+                font-size: 3rem;
+                margin-bottom: 1rem;
+                display: block;
+            }
+            .theory-name {
+                font-family: "Playfair Display", serif;
+                font-size: 1.6rem;
+                font-weight: 700;
+                margin-bottom: 0.5rem;
+            }
+            .theory-tagline {
+                font-family: "DM Mono", monospace;
+                font-size: 0.78rem;
+                letter-spacing: 0.08em;
+                text-transform: uppercase;
+                margin-bottom: 1.25rem;
+            }
+            .theory-tagline.c {
+                color: var(--electric);
+            }
+            .theory-tagline.d {
+                color: var(--neon);
+            }
+            .theory-body {
+                color: rgba(245, 240, 232, 0.75);
+                font-size: 0.95rem;
+                line-height: 1.7;
+            }
+            .theory-cite {
+                display: block;
+                margin-top: 1.5rem;
+                font-size: 0.78rem;
+                color: var(--muted);
+                font-style: italic;
+                border-left: 2px solid rgba(255, 255, 255, 0.1);
+                padding-left: 0.75rem;
+            }
+
+            /* ── TROLLEY PROBLEM ── */
+            #trolley {
+                background: linear-gradient(
+                    180deg,
+                    var(--deep) 0%,
+                    #0a0c14 100%
+                );
+            }
+            .trolley-scene {
+                background: var(--panel);
+                border: 1px solid var(--border);
+                border-radius: 2px;
+                overflow: hidden;
+                margin-top: 2.5rem;
+            }
+            .trolley-canvas-wrap {
+                width: 100%;
+                background: #0d1017;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding: 2rem 1rem;
+                position: relative;
+                min-height: 280px;
+            }
+            .trolley-svg {
+                width: 100%;
+                max-width: 680px;
+                height: auto;
+            }
+            .lever-btn {
+                position: absolute;
+                bottom: 1.5rem;
+                left: 50%;
+                transform: translateX(-50%);
+                padding: 0.8rem 2.5rem;
+                font-family: "DM Mono", monospace;
+                font-size: 0.85rem;
+                font-weight: 500;
+                letter-spacing: 0.1em;
+                text-transform: uppercase;
+                cursor: pointer;
+                border: none;
+                transition: all 0.2s;
+                clip-path: polygon(
+                    6px 0%,
+                    100% 0%,
+                    calc(100% - 6px) 100%,
+                    0% 100%
+                );
+            }
+            .lever-btn.pull {
+                background: var(--electric);
+                color: var(--ink);
+            }
+            .lever-btn.pull:hover {
+                box-shadow: 0 6px 24px rgba(255, 230, 0, 0.4);
+            }
+            .lever-btn.reset {
+                background: rgba(255, 255, 255, 0.08);
+                color: var(--parchment);
+                border: 1px solid var(--border);
+            }
+            .trolley-controls {
+                padding: 2rem;
+                display: flex;
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+            .trolley-choice-header {
+                font-family: "Playfair Display", serif;
+                font-size: 1.4rem;
+                font-weight: 700;
+            }
+            .trolley-prompt {
+                color: rgba(245, 240, 232, 0.7);
+                font-size: 0.95rem;
+            }
+            .trolley-votes {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 1rem;
+            }
+            .vote-btn {
+                padding: 1.25rem;
+                border: 1px solid var(--border);
+                background: rgba(255, 255, 255, 0.03);
+                cursor: pointer;
+                text-align: left;
+                transition: all 0.25s;
+                font-family: "DM Sans", sans-serif;
+                color: var(--parchment);
+            }
+            .vote-btn:hover {
+                background: rgba(255, 255, 255, 0.07);
+            }
+            .vote-btn.active-c {
+                border-color: var(--electric);
+                background: rgba(255, 230, 0, 0.07);
+            }
+            .vote-btn.active-d {
+                border-color: var(--neon);
+                background: rgba(0, 229, 255, 0.07);
+            }
+            .vote-label {
+                font-family: "DM Mono", monospace;
+                font-size: 0.7rem;
+                letter-spacing: 0.1em;
+                text-transform: uppercase;
+                margin-bottom: 0.4rem;
+                display: block;
+            }
+            .vote-label.c {
+                color: var(--electric);
+            }
+            .vote-label.d {
+                color: var(--neon);
+            }
+            .vote-text {
+                font-size: 0.9rem;
+                line-height: 1.5;
+            }
+            .verdict-box {
+                padding: 1.5rem;
+                background: rgba(0, 0, 0, 0.3);
+                border: 1px solid var(--border);
+                display: none;
+            }
+            .verdict-box.show {
+                display: block;
+                animation: fadeIn 0.4s;
+            }
+            @keyframes fadeIn {
+                from {
+                    opacity: 0;
+                    transform: translateY(8px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+            .verdict-title {
+                font-family: "DM Mono", monospace;
+                font-size: 0.72rem;
+                letter-spacing: 0.12em;
+                text-transform: uppercase;
+                margin-bottom: 0.75rem;
+            }
+            .verdict-body {
+                font-size: 0.92rem;
+                color: rgba(245, 240, 232, 0.8);
+                line-height: 1.7;
+            }
+
+            /* ── SCENARIO ENGINE ── */
+            #scenarios {
+                background: #0a0c14;
+            }
+            .scenario-card {
+                background: var(--panel);
+                border: 1px solid var(--border);
+                overflow: hidden;
+                margin-top: 2.5rem;
+            }
+            .scenario-header {
+                padding: 1.5rem 2rem;
+                background: rgba(0, 0, 0, 0.3);
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                flex-wrap: wrap;
+                gap: 1rem;
+                border-bottom: 1px solid var(--border);
+            }
+            .scenario-num {
+                font-family: "DM Mono", monospace;
+                font-size: 0.7rem;
+                letter-spacing: 0.15em;
+                text-transform: uppercase;
+                color: var(--electric);
+            }
+            .scenario-nav {
+                display: flex;
+                gap: 0.5rem;
+            }
+            .snav-btn {
+                width: 32px;
+                height: 32px;
+                background: rgba(255, 255, 255, 0.05);
+                border: 1px solid var(--border);
+                color: var(--parchment);
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 0.9rem;
+                transition: all 0.2s;
+            }
+            .snav-btn:hover {
+                background: rgba(255, 230, 0, 0.15);
+                border-color: var(--electric);
+            }
+            .scenario-body {
+                padding: 2rem;
+            }
+            .scenario-title {
+                font-family: "Playfair Display", serif;
+                font-size: 1.5rem;
+                font-weight: 700;
+                margin-bottom: 1rem;
+            }
+            .scenario-text {
+                color: rgba(245, 240, 232, 0.75);
+                font-size: 0.95rem;
+                margin-bottom: 2rem;
+            }
+            .scenario-choices {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 1rem;
+            }
+            @media (max-width: 500px) {
+                .scenario-choices {
+                    grid-template-columns: 1fr;
+                }
+            }
+            .choice-btn {
+                padding: 1.25rem 1.5rem;
+                background: rgba(255, 255, 255, 0.03);
+                border: 1px solid var(--border);
+                cursor: pointer;
+                text-align: left;
+                transition: all 0.25s;
+                color: var(--parchment);
+                font-family: "DM Sans", sans-serif;
+            }
+            .choice-btn:hover {
+                background: rgba(255, 255, 255, 0.06);
+                border-color: rgba(255, 255, 255, 0.2);
+            }
+            .choice-btn.picked-c {
+                border-color: var(--electric);
+                background: rgba(255, 230, 0, 0.06);
+            }
+            .choice-btn.picked-d {
+                border-color: var(--neon);
+                background: rgba(0, 229, 255, 0.06);
+            }
+            .choice-btn.wrong {
+                border-color: var(--coral);
+                background: rgba(255, 77, 77, 0.06);
+            }
+            .choice-tag {
+                display: block;
+                font-family: "DM Mono", monospace;
+                font-size: 0.65rem;
+                letter-spacing: 0.1em;
+                text-transform: uppercase;
+                margin-bottom: 0.4rem;
+            }
+            .choice-tag.c {
+                color: var(--electric);
+            }
+            .choice-tag.d {
+                color: var(--neon);
+            }
+            .choice-text {
+                font-size: 0.88rem;
+                line-height: 1.5;
+            }
+            .scenario-reveal {
+                margin-top: 1.5rem;
+                padding: 1.5rem;
+                background: rgba(0, 0, 0, 0.3);
+                border: 1px solid var(--border);
+                display: none;
+            }
+            .scenario-reveal.show {
+                display: block;
+                animation: fadeIn 0.4s;
+            }
+            .reveal-heading {
+                font-family: "DM Mono", monospace;
+                font-size: 0.7rem;
+                letter-spacing: 0.12em;
+                text-transform: uppercase;
+                margin-bottom: 0.75rem;
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+            }
+            .dot {
+                width: 6px;
+                height: 6px;
+                border-radius: 50%;
+                display: inline-block;
+            }
+            .dot-c {
+                background: var(--electric);
+            }
+            .dot-d {
+                background: var(--neon);
+            }
+            .reveal-text {
+                font-size: 0.92rem;
+                color: rgba(245, 240, 232, 0.8);
+                line-height: 1.7;
+            }
+            .score-bar {
+                margin-top: 2rem;
+            }
+            .score-label {
+                display: flex;
+                justify-content: space-between;
+                font-family: "DM Mono", monospace;
+                font-size: 0.7rem;
+                letter-spacing: 0.08em;
+                text-transform: uppercase;
+                color: var(--muted);
+                margin-bottom: 0.4rem;
+            }
+            .progress-track {
+                height: 4px;
+                background: rgba(255, 255, 255, 0.08);
+                position: relative;
+            }
+            .progress-fill {
+                height: 100%;
+                transition: width 0.6s ease;
+            }
+            .progress-fill.c {
+                background: var(--electric);
+            }
+            .progress-fill.d {
+                background: var(--neon);
+            }
+
+            /* ── DEEP DIVE ── */
+            #deepdive {
+                background: var(--deep);
+            }
+            .accordion-item {
+                border: 1px solid var(--border);
+                margin-bottom: -1px;
+                background: var(--panel);
+            }
+            .accordion-trigger {
+                width: 100%;
+                padding: 1.25rem 1.5rem;
+                background: none;
+                border: none;
+                cursor: pointer;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                color: var(--parchment);
+                text-align: left;
+                font-family: "Playfair Display", serif;
+                font-size: 1.05rem;
+                transition: background 0.2s;
+            }
+            .accordion-trigger:hover {
+                background: rgba(255, 255, 255, 0.03);
+            }
+            .accordion-icon {
+                font-size: 1.2rem;
+                transition: transform 0.3s;
+                color: var(--electric);
+            }
+            .accordion-item.open .accordion-icon {
+                transform: rotate(45deg);
+            }
+            .accordion-content {
+                max-height: 0;
+                overflow: hidden;
+                transition:
+                    max-height 0.4s ease,
+                    padding 0.4s;
+                padding: 0 1.5rem;
+            }
+            .accordion-item.open .accordion-content {
+                max-height: 600px;
+                padding: 0 1.5rem 1.5rem;
+            }
+            .accordion-inner {
+                color: rgba(245, 240, 232, 0.75);
+                font-size: 0.93rem;
+                line-height: 1.8;
+                padding-top: 1rem;
+                border-top: 1px solid var(--border);
+            }
+            .theory-tag-inline {
+                display: inline-block;
+                padding: 0.2rem 0.6rem;
+                font-family: "DM Mono", monospace;
+                font-size: 0.65rem;
+                letter-spacing: 0.1em;
+                text-transform: uppercase;
+                margin-bottom: 0.75rem;
+            }
+            .theory-tag-inline.c {
+                background: rgba(255, 230, 0, 0.15);
+                color: var(--electric);
+            }
+            .theory-tag-inline.d {
+                background: rgba(0, 229, 255, 0.1);
+                color: var(--neon);
+            }
+            .theory-tag-inline.both {
+                background: rgba(127, 255, 158, 0.1);
+                color: var(--sage);
+            }
+
+            /* ── QUIZ ── */
+            #quiz {
+                background: #0a0c14;
+            }
+            .quiz-wrap {
+                background: var(--panel);
+                border: 1px solid var(--border);
+                padding: 2.5rem 2rem;
+                margin-top: 2.5rem;
+                position: relative;
+                overflow: hidden;
+            }
+            .quiz-bg-text {
+                position: absolute;
+                top: -1rem;
+                right: -1rem;
+                font-family: "Playfair Display", serif;
+                font-size: 10rem;
+                font-weight: 900;
+                color: rgba(255, 255, 255, 0.02);
+                pointer-events: none;
+                line-height: 1;
+                user-select: none;
+            }
+            .quiz-progress-dots {
+                display: flex;
+                gap: 0.4rem;
+                margin-bottom: 2rem;
+            }
+            .qdot {
+                width: 8px;
+                height: 8px;
+                border-radius: 50%;
+                background: rgba(255, 255, 255, 0.1);
+                transition: background 0.3s;
+            }
+            .qdot.done {
+                background: var(--electric);
+            }
+            .qdot.current {
+                background: var(--neon);
+                box-shadow: 0 0 6px var(--neon);
+            }
+            .quiz-q {
+                font-family: "Playfair Display", serif;
+                font-size: clamp(1.1rem, 3vw, 1.4rem);
+                margin-bottom: 2rem;
+                line-height: 1.4;
+            }
+            .quiz-options {
+                display: flex;
+                flex-direction: column;
+                gap: 0.75rem;
+                margin-bottom: 1.5rem;
+            }
+            .qopt {
+                padding: 1rem 1.25rem;
+                background: rgba(255, 255, 255, 0.03);
+                border: 1px solid var(--border);
+                cursor: pointer;
+                display: flex;
+                align-items: flex-start;
+                gap: 1rem;
+                transition: all 0.2s;
+                color: var(--parchment);
+                font-family: "DM Sans", sans-serif;
+                text-align: left;
+            }
+            .qopt:hover {
+                background: rgba(255, 255, 255, 0.06);
+                border-color: rgba(255, 255, 255, 0.2);
+            }
+            .qopt.correct {
+                border-color: var(--sage);
+                background: rgba(127, 255, 158, 0.07);
+            }
+            .qopt.incorrect {
+                border-color: var(--coral);
+                background: rgba(255, 77, 77, 0.07);
+            }
+            .qopt-letter {
+                width: 26px;
+                height: 26px;
+                min-width: 26px;
+                border: 1px solid rgba(255, 255, 255, 0.2);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-family: "DM Mono", monospace;
+                font-size: 0.7rem;
+                color: var(--muted);
+                transition: all 0.2s;
+                flex-shrink: 0;
+            }
+            .qopt:hover .qopt-letter {
+                border-color: var(--electric);
+                color: var(--electric);
+            }
+            .qopt.correct .qopt-letter {
+                border-color: var(--sage);
+                color: var(--sage);
+            }
+            .qopt.incorrect .qopt-letter {
+                border-color: var(--coral);
+                color: var(--coral);
+            }
+            .qopt-text {
+                font-size: 0.92rem;
+                line-height: 1.5;
+                padding-top: 2px;
+            }
+            .quiz-feedback {
+                padding: 1rem 1.25rem;
+                margin-top: 0.5rem;
+                border: 1px solid var(--border);
+                background: rgba(0, 0, 0, 0.3);
+                display: none;
+                animation: fadeIn 0.3s;
+            }
+            .quiz-feedback.show {
+                display: block;
+            }
+            .quiz-feedback-text {
+                font-size: 0.9rem;
+                color: rgba(245, 240, 232, 0.8);
+            }
+            .quiz-next {
+                margin-top: 1.5rem;
+                padding: 0.85rem 2rem;
+                background: var(--electric);
+                color: var(--ink);
+                font-family: "DM Mono", monospace;
+                font-size: 0.82rem;
+                letter-spacing: 0.08em;
+                text-transform: uppercase;
+                border: none;
+                cursor: pointer;
+                transition: all 0.2s;
+                clip-path: polygon(
+                    6px 0%,
+                    100% 0%,
+                    calc(100% - 6px) 100%,
+                    0% 100%
+                );
+                display: none;
+            }
+            .quiz-next:hover {
+                box-shadow: 0 6px 20px rgba(255, 230, 0, 0.35);
+            }
+            .quiz-result {
+                text-align: center;
+                padding: 2rem 1rem;
+                display: none;
+            }
+            .quiz-result.show {
+                display: block;
+                animation: fadeIn 0.5s;
+            }
+            .quiz-score {
+                font-family: "Playfair Display", serif;
+                font-size: 5rem;
+                font-weight: 900;
+                color: var(--electric);
+                line-height: 1;
+            }
+            .quiz-score-label {
+                color: var(--muted);
+                margin-top: 0.5rem;
+                font-size: 0.9rem;
+            }
+            .quiz-restart {
+                margin-top: 2rem;
+                padding: 0.85rem 2rem;
+                background: none;
+                border: 1px solid var(--electric);
+                color: var(--electric);
+                font-family: "DM Mono", monospace;
+                font-size: 0.82rem;
+                letter-spacing: 0.08em;
+                text-transform: uppercase;
+                cursor: pointer;
+                transition: all 0.2s;
+            }
+            .quiz-restart:hover {
+                background: var(--electric);
+                color: var(--ink);
+            }
+
+            /* ── CITATIONS ── */
+            #citations {
+                background: var(--deep);
+                border-top: 1px solid var(--border);
+            }
+            .cite-block {
+                background: var(--panel);
+                border: 1px solid var(--border);
+                padding: 1.5rem 2rem;
+                margin-top: 1rem;
+            }
+            .cite-entry {
+                font-size: 0.87rem;
+                line-height: 1.7;
+                color: rgba(245, 240, 232, 0.7);
+                padding: 0.75rem 0;
+                border-bottom: 1px solid var(--border);
+            }
+            .cite-entry:last-child {
+                border-bottom: none;
+            }
+            .cite-author {
+                color: var(--parchment);
+                font-weight: 500;
+            }
+            .cite-title {
+                font-style: italic;
+            }
+
+            /* ── FOOTER ── */
+            footer {
+                background: #0a0c14;
+                border-top: 1px solid var(--border);
+                padding: 2rem 1.5rem;
+                text-align: center;
+                color: var(--muted);
+                font-size: 0.82rem;
+            }
+            footer a {
+                color: var(--electric);
+                text-decoration: none;
+            }
+
+            /* ── ANIMATIONS ── */
+            .reveal {
+                opacity: 0;
+                transform: translateY(24px);
+                transition:
+                    opacity 0.6s ease,
+                    transform 0.6s ease;
+            }
+            .reveal.visible {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            /* ── COMPARISON TABLE ── */
+            .compare-table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-top: 2rem;
+            }
+            .compare-table th {
+                padding: 0.9rem 1rem;
+                text-align: left;
+                font-family: "DM Mono", monospace;
+                font-size: 0.72rem;
+                letter-spacing: 0.1em;
+                text-transform: uppercase;
+                background: rgba(0, 0, 0, 0.3);
+                border: 1px solid var(--border);
+            }
+            .compare-table th:nth-child(2) {
+                color: var(--electric);
+            }
+            .compare-table th:nth-child(3) {
+                color: var(--neon);
+            }
+            .compare-table td {
+                padding: 1rem;
+                font-size: 0.88rem;
+                color: rgba(245, 240, 232, 0.75);
+                border: 1px solid var(--border);
+                vertical-align: top;
+                line-height: 1.6;
+            }
+            .compare-table tr:nth-child(even) td {
+                background: rgba(255, 255, 255, 0.02);
+            }
+            .compare-table td:first-child {
+                color: var(--muted);
+                font-size: 0.8rem;
+                letter-spacing: 0.05em;
+                text-transform: uppercase;
+                font-family: "DM Mono", monospace;
+            }
+
+            /* pull-quote */
+            .pullquote {
+                border-left: 3px solid var(--electric);
+                padding: 1rem 1.5rem;
+                margin: 2rem 0;
+                background: rgba(255, 230, 0, 0.04);
+                font-family: "Playfair Display", serif;
+                font-style: italic;
+                font-size: 1.1rem;
+                color: var(--parchment);
+            }
+            .pullquote cite {
+                display: block;
+                margin-top: 0.6rem;
+                font-family: "DM Mono", monospace;
+                font-style: normal;
+                font-size: 0.72rem;
+                letter-spacing: 0.08em;
+                color: var(--muted);
+            }
+            .pullquote.neon {
+                border-left-color: var(--neon);
+                background: rgba(0, 229, 255, 0.04);
+            }
+
+            /* Trolley SVG animation */
+            .trolley-body {
+                transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+            .track-straight,
+            .track-branch {
+                stroke: var(--muted);
+                stroke-width: 2;
+                fill: none;
+            }
+            .person {
+                transition: opacity 0.5s;
+            }
+
+            /* mobile fixes */
+            @media (max-width: 500px) {
+                .quiz-wrap {
+                    padding: 1.5rem 1.25rem;
+                }
+                .trolley-controls {
+                    padding: 1.25rem;
+                }
+                .accordion-inner {
+                    font-size: 0.88rem;
+                }
+                .compare-table {
+                    font-size: 0.82rem;
+                }
+                .compare-table td,
+                .compare-table th {
+                    padding: 0.7rem 0.6rem;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <!-- NAV -->
+        <nav>
+            <span class="nav-logo">The Ethics Lab</span>
+            <ul class="nav-links">
+                <li><a href="#theories">Theories</a></li>
+                <li><a href="#trolley">Trolley</a></li>
+                <li><a href="#scenarios">Scenarios</a></li>
+                <li><a href="#deepdive">Deep Dive</a></li>
+                <li><a href="#quiz">Quiz</a></li>
+            </ul>
+        </nav>
+
+        <!-- HERO -->
+        <section id="hero">
+            <div class="hero-grid"></div>
+            <div class="hero-glow"></div>
+            <div class="container">
+                <div class="hero-tag">
+                    Phil 101 · Ethics Module · Spring 2026
+                </div>
+                <h1 class="hero-title">
+                    The Ethics<br />
+                    <span>Lab.</span>
+                </h1>
+                <p class="hero-sub">
+                    Do <em>outcomes</em> justify anything — or are some things
+                    just wrong?<br />
+                    Two titans of moral philosophy. One question:
+                    <em>how should you live?</em>
+                </p>
+                <a href="#theories" class="hero-cta"> Start Learning → </a>
+            </div>
+            <div class="scroll-indicator">Scroll</div>
+        </section>
+
+        <!-- THEORIES OVERVIEW -->
+        <section id="theories">
+            <div class="container">
+                <div class="section-label">Module 01 — Theories</div>
+                <h2 class="section-title reveal">
+                    Two Ways to Think About Right and Wrong
+                </h2>
+                <p
+                    class="reveal"
+                    style="
+                        color: rgba(245, 240, 232, 0.65);
+                        max-width: 640px;
+                        margin-bottom: 0.5rem;
+                    "
+                >
+                    Moral philosophy has produced hundreds of frameworks — but
+                    two dominate introductory ethics. They start from completely
+                    different premises and often reach opposite conclusions.
+                </p>
+                <div class="theory-grid">
+                    <div class="theory-card consequentialist reveal">
+                        <span class="theory-icon">⚖️</span>
+                        <div class="theory-tagline c">Consequentialism</div>
+                        <div class="theory-name">Outcomes First</div>
+                        <p class="theory-body">
+                            Judge every action by its results. The right thing
+                            to do is whatever produces the best overall
+                            consequences for everyone affected. Morality is
+                            fundamentally forward-looking — what will this
+                            action bring about?
+                        </p>
+                        <p class="theory-body" style="margin-top: 0.8rem">
+                            <strong style="color: var(--parchment)"
+                                >Utilitarianism</strong
+                            >, the most famous version, holds that we should
+                            maximize total happiness and minimize total pain —
+                            not just for ourselves, but for all affected beings.
+                        </p>
+                        <span class="theory-cite">
+                            Gronholz, Shane. "Consequentialism and
+                            Utilitarianism." <i>1000-Word Philosophy</i>, 2014.
+                            "Consequentialists typically argue that we are
+                            obligated to do whatever action has the best overall
+                            consequences."
+                        </span>
+                    </div>
+                    <div class="theory-card deontological reveal">
+                        <span class="theory-icon">⚔️</span>
+                        <div class="theory-tagline d">Deontology</div>
+                        <div class="theory-name">Duty First</div>
+                        <p class="theory-body">
+                            Some actions are inherently right or wrong —
+                            regardless of their consequences. Morality is about
+                            fulfilling duties and respecting persons, not
+                            calculating outcomes. You can't use someone as a
+                            mere tool, even for a good cause.
+                        </p>
+                        <p class="theory-body" style="margin-top: 0.8rem">
+                            <strong style="color: var(--parchment)"
+                                >Immanuel Kant</strong
+                            >
+                            (1724–1804) developed the most influential
+                            deontological framework, grounded in the Categorical
+                            Imperative: act only on principles you could will to
+                            become universal laws.
+                        </p>
+                        <span class="theory-cite">
+                            Chapman, Andrew. "Deontology: Kantian Ethics."
+                            <i>1000-Word Philosophy</i>, 2014. "Deontology is a
+                            type of moral theory that denies that morality is
+                            solely about consequences."
+                        </span>
+                    </div>
+                </div>
+
+                <!-- COMPARISON TABLE -->
+                <div class="reveal" style="overflow-x: auto; margin-top: 3rem">
+                    <h3
+                        style="
+                            font-family: &quot;Playfair Display&quot;, serif;
+                            font-size: 1.4rem;
+                            margin-bottom: 0.5rem;
+                        "
+                    >
+                        Side by Side
+                    </h3>
+                    <table class="compare-table">
+                        <thead>
+                            <tr>
+                                <th>Dimension</th>
+                                <th>Consequentialism</th>
+                                <th>Deontology (Kant)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Core Question</td>
+                                <td>What produces the best outcomes?</td>
+                                <td>
+                                    What duties do I have regardless of outcome?
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>What Makes an Act Right?</td>
+                                <td>Its good consequences (outcomes)</td>
+                                <td>
+                                    Conformity to moral duty / rational
+                                    principle
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Is Lying Ever OK?</td>
+                                <td>Yes — if it produces better outcomes</td>
+                                <td>
+                                    No — lying violates the Categorical
+                                    Imperative
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Famous Thought Experiment</td>
+                                <td>"Kill 1 to save 5" can be obligatory</td>
+                                <td>
+                                    Cannot push the giant man (he's used as a
+                                    means)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Key Criticism</td>
+                                <td>
+                                    Can justify atrocities if numbers work out
+                                </td>
+                                <td>
+                                    Can demand absurd rigidity (tell truth to
+                                    murderer)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Notable Thinkers</td>
+                                <td>Bentham, J.S. Mill, Peter Singer</td>
+                                <td>
+                                    Immanuel Kant, W.D. Ross, Christine
+                                    Korsgaard
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- TROLLEY PROBLEM -->
+        <section id="trolley">
+            <div class="container">
+                <div class="section-label">Module 02 — The Classic</div>
+                <h2 class="section-title reveal">The Trolley Problem</h2>
+                <p
+                    class="reveal"
+                    style="color: rgba(245, 240, 232, 0.65); max-width: 640px"
+                >
+                    Designed by philosopher Philippa Foot (1967) and extended by
+                    Judith Jarvis Thomson, trolley problems reveal deep tensions
+                    between our moral intuitions. Choose your action — then see
+                    how each theory would evaluate it.
+                </p>
+                <div class="trolley-scene reveal">
+                    <div class="trolley-canvas-wrap">
+                        <svg
+                            class="trolley-svg"
+                            viewBox="0 0 680 230"
+                            xmlns="http://www.w3.org/2000/svg"
+                        >
+                            <!-- Main track -->
+                            <line
+                                x1="30"
+                                y1="140"
+                                x2="310"
+                                y2="140"
+                                class="track-straight"
+                                stroke="#666"
+                                stroke-width="3"
+                            />
+                            <!-- Branch point -->
+                            <line
+                                x1="310"
+                                y1="140"
+                                x2="640"
+                                y2="140"
+                                class="track-straight"
+                                stroke="#555"
+                                stroke-width="3"
+                                id="track-main-ext"
+                            />
+                            <!-- Upper branch (divert track) -->
+                            <path
+                                d="M 310 140 Q 340 140 360 110 L 640 110"
+                                class="track-branch"
+                                stroke="#888"
+                                stroke-width="3"
+                                stroke-dasharray="none"
+                                id="track-branch"
+                            />
+
+                            <!-- Rails (ties) main -->
+                            <g stroke="#333" stroke-width="2">
+                                <line x1="50" y1="132" x2="50" y2="148" />
+                                <line x1="80" y1="132" x2="80" y2="148" />
+                                <line x1="110" y1="132" x2="110" y2="148" />
+                                <line x1="140" y1="132" x2="140" y2="148" />
+                                <line x1="170" y1="132" x2="170" y2="148" />
+                                <line x1="200" y1="132" x2="200" y2="148" />
+                                <line x1="230" y1="132" x2="230" y2="148" />
+                                <line x1="260" y1="132" x2="260" y2="148" />
+                            </g>
+                            <!-- Rails upper -->
+                            <g stroke="#333" stroke-width="2">
+                                <line x1="380" y1="102" x2="380" y2="118" />
+                                <line x1="410" y1="102" x2="410" y2="118" />
+                                <line x1="440" y1="102" x2="440" y2="118" />
+                                <line x1="470" y1="102" x2="470" y2="118" />
+                            </g>
+                            <!-- Rails lower ext -->
+                            <g stroke="#333" stroke-width="2">
+                                <line x1="370" y1="132" x2="370" y2="148" />
+                                <line x1="410" y1="132" x2="410" y2="148" />
+                                <line x1="450" y1="132" x2="450" y2="148" />
+                                <line x1="490" y1="132" x2="490" y2="148" />
+                                <line x1="530" y1="132" x2="530" y2="148" />
+                                <line x1="570" y1="132" x2="570" y2="148" />
+                            </g>
+
+                            <!-- LEVER -->
+                            <g id="lever-group" style="cursor: pointer">
+                                <circle
+                                    cx="310"
+                                    cy="140"
+                                    r="8"
+                                    fill="#ffe600"
+                                    opacity="0.9"
+                                />
+                                <line
+                                    id="lever-line"
+                                    x1="310"
+                                    y1="132"
+                                    x2="300"
+                                    y2="116"
+                                    stroke="#ffe600"
+                                    stroke-width="3"
+                                    stroke-linecap="round"
+                                />
+                            </g>
+
+                            <!-- TROLLEY -->
+                            <g
+                                class="trolley-body"
+                                id="trolleyObj"
+                                transform="translate(60,0)"
+                            >
+                                <rect
+                                    x="0"
+                                    y="112"
+                                    width="64"
+                                    height="36"
+                                    rx="4"
+                                    fill="#ff4d4d"
+                                    stroke="#cc0000"
+                                    stroke-width="1.5"
+                                />
+                                <rect
+                                    x="4"
+                                    y="116"
+                                    width="14"
+                                    height="10"
+                                    rx="2"
+                                    fill="#ffaaaa"
+                                    opacity="0.6"
+                                />
+                                <rect
+                                    x="22"
+                                    y="116"
+                                    width="14"
+                                    height="10"
+                                    rx="2"
+                                    fill="#ffaaaa"
+                                    opacity="0.6"
+                                />
+                                <rect
+                                    x="40"
+                                    y="116"
+                                    width="14"
+                                    height="10"
+                                    rx="2"
+                                    fill="#ffaaaa"
+                                    opacity="0.6"
+                                />
+                                <circle
+                                    cx="12"
+                                    cy="150"
+                                    r="6"
+                                    fill="#222"
+                                    stroke="#555"
+                                    stroke-width="1.5"
+                                />
+                                <circle
+                                    cx="52"
+                                    cy="150"
+                                    r="6"
+                                    fill="#222"
+                                    stroke="#555"
+                                    stroke-width="1.5"
+                                />
+                                <text
+                                    x="32"
+                                    y="134"
+                                    fill="white"
+                                    font-size="8"
+                                    text-anchor="middle"
+                                    font-family="monospace"
+                                    font-weight="bold"
+                                >
+                                    TRAM
+                                </text>
+                                <!-- Speed lines -->
+                                <line
+                                    x1="-8"
+                                    y1="120"
+                                    x2="-20"
+                                    y2="120"
+                                    stroke="#ff4d4d"
+                                    stroke-width="2"
+                                    opacity="0.6"
+                                />
+                                <line
+                                    x1="-8"
+                                    y1="128"
+                                    x2="-24"
+                                    y2="128"
+                                    stroke="#ff4d4d"
+                                    stroke-width="2"
+                                    opacity="0.6"
+                                />
+                                <line
+                                    x1="-8"
+                                    y1="136"
+                                    x2="-18"
+                                    y2="136"
+                                    stroke="#ff4d4d"
+                                    stroke-width="2"
+                                    opacity="0.6"
+                                />
+                            </g>
+
+                            <!-- 5 PEOPLE on main track -->
+                            <g id="five-people">
+                                <g
+                                    class="person"
+                                    id="p1"
+                                    transform="translate(505,100)"
+                                >
+                                    <circle
+                                        cx="0"
+                                        cy="0"
+                                        r="7"
+                                        fill="#7fff9e"
+                                    />
+                                    <line
+                                        x1="0"
+                                        y1="7"
+                                        x2="0"
+                                        y2="22"
+                                        stroke="#7fff9e"
+                                        stroke-width="2"
+                                    />
+                                    <line
+                                        x1="-6"
+                                        y1="15"
+                                        x2="6"
+                                        y2="15"
+                                        stroke="#7fff9e"
+                                        stroke-width="2"
+                                    />
+                                    <line
+                                        x1="0"
+                                        y1="22"
+                                        x2="-5"
+                                        y2="35"
+                                        stroke="#7fff9e"
+                                        stroke-width="2"
+                                    />
+                                    <line
+                                        x1="0"
+                                        y1="22"
+                                        x2="5"
+                                        y2="35"
+                                        stroke="#7fff9e"
+                                        stroke-width="2"
+                                    />
+                                </g>
+                                <g
+                                    class="person"
+                                    id="p2"
+                                    transform="translate(525,100)"
+                                >
+                                    <circle
+                                        cx="0"
+                                        cy="0"
+                                        r="7"
+                                        fill="#7fff9e"
+                                    />
+                                    <line
+                                        x1="0"
+                                        y1="7"
+                                        x2="0"
+                                        y2="22"
+                                        stroke="#7fff9e"
+                                        stroke-width="2"
+                                    />
+                                    <line
+                                        x1="-6"
+                                        y1="15"
+                                        x2="6"
+                                        y2="15"
+                                        stroke="#7fff9e"
+                                        stroke-width="2"
+                                    />
+                                    <line
+                                        x1="0"
+                                        y1="22"
+                                        x2="-5"
+                                        y2="35"
+                                        stroke="#7fff9e"
+                                        stroke-width="2"
+                                    />
+                                    <line
+                                        x1="0"
+                                        y1="22"
+                                        x2="5"
+                                        y2="35"
+                                        stroke="#7fff9e"
+                                        stroke-width="2"
+                                    />
+                                </g>
+                                <g
+                                    class="person"
+                                    id="p3"
+                                    transform="translate(545,100)"
+                                >
+                                    <circle
+                                        cx="0"
+                                        cy="0"
+                                        r="7"
+                                        fill="#7fff9e"
+                                    />
+                                    <line
+                                        x1="0"
+                                        y1="7"
+                                        x2="0"
+                                        y2="22"
+                                        stroke="#7fff9e"
+                                        stroke-width="2"
+                                    />
+                                    <line
+                                        x1="-6"
+                                        y1="15"
+                                        x2="6"
+                                        y2="15"
+                                        stroke="#7fff9e"
+                                        stroke-width="2"
+                                    />
+                                    <line
+                                        x1="0"
+                                        y1="22"
+                                        x2="-5"
+                                        y2="35"
+                                        stroke="#7fff9e"
+                                        stroke-width="2"
+                                    />
+                                    <line
+                                        x1="0"
+                                        y1="22"
+                                        x2="5"
+                                        y2="35"
+                                        stroke="#7fff9e"
+                                        stroke-width="2"
+                                    />
+                                </g>
+                                <g
+                                    class="person"
+                                    id="p4"
+                                    transform="translate(565,100)"
+                                >
+                                    <circle
+                                        cx="0"
+                                        cy="0"
+                                        r="7"
+                                        fill="#7fff9e"
+                                    />
+                                    <line
+                                        x1="0"
+                                        y1="7"
+                                        x2="0"
+                                        y2="22"
+                                        stroke="#7fff9e"
+                                        stroke-width="2"
+                                    />
+                                    <line
+                                        x1="-6"
+                                        y1="15"
+                                        x2="6"
+                                        y2="15"
+                                        stroke="#7fff9e"
+                                        stroke-width="2"
+                                    />
+                                    <line
+                                        x1="0"
+                                        y1="22"
+                                        x2="-5"
+                                        y2="35"
+                                        stroke="#7fff9e"
+                                        stroke-width="2"
+                                    />
+                                    <line
+                                        x1="0"
+                                        y1="22"
+                                        x2="5"
+                                        y2="35"
+                                        stroke="#7fff9e"
+                                        stroke-width="2"
+                                    />
+                                </g>
+                                <g
+                                    class="person"
+                                    id="p5"
+                                    transform="translate(585,100)"
+                                >
+                                    <circle
+                                        cx="0"
+                                        cy="0"
+                                        r="7"
+                                        fill="#7fff9e"
+                                    />
+                                    <line
+                                        x1="0"
+                                        y1="7"
+                                        x2="0"
+                                        y2="22"
+                                        stroke="#7fff9e"
+                                        stroke-width="2"
+                                    />
+                                    <line
+                                        x1="-6"
+                                        y1="15"
+                                        x2="6"
+                                        y2="15"
+                                        stroke="#7fff9e"
+                                        stroke-width="2"
+                                    />
+                                    <line
+                                        x1="0"
+                                        y1="22"
+                                        x2="-5"
+                                        y2="35"
+                                        stroke="#7fff9e"
+                                        stroke-width="2"
+                                    />
+                                    <line
+                                        x1="0"
+                                        y1="22"
+                                        x2="5"
+                                        y2="35"
+                                        stroke="#7fff9e"
+                                        stroke-width="2"
+                                    />
+                                </g>
+                            </g>
+                            <!-- 5 people label -->
+                            <text
+                                x="545"
+                                y="90"
+                                fill="#7fff9e"
+                                font-size="9"
+                                text-anchor="middle"
+                                font-family="monospace"
+                            >
+                                5 people
+                            </text>
+
+                            <!-- 1 PERSON on branch track -->
+                            <g
+                                id="one-person-group"
+                                transform="translate(470,71)"
+                            >
+                                <circle cx="0" cy="0" r="7" fill="#00e5ff" />
+                                <line
+                                    x1="0"
+                                    y1="7"
+                                    x2="0"
+                                    y2="22"
+                                    stroke="#00e5ff"
+                                    stroke-width="2"
+                                />
+                                <line
+                                    x1="-6"
+                                    y1="15"
+                                    x2="6"
+                                    y2="15"
+                                    stroke="#00e5ff"
+                                    stroke-width="2"
+                                />
+                                <line
+                                    x1="0"
+                                    y1="22"
+                                    x2="-5"
+                                    y2="35"
+                                    stroke="#00e5ff"
+                                    stroke-width="2"
+                                />
+                                <line
+                                    x1="0"
+                                    y1="22"
+                                    x2="5"
+                                    y2="35"
+                                    stroke="#00e5ff"
+                                    stroke-width="2"
+                                />
+                            </g>
+                            <text
+                                x="470"
+                                y="62"
+                                fill="#00e5ff"
+                                font-size="9"
+                                text-anchor="middle"
+                                font-family="monospace"
+                            >
+                                1 person
+                            </text>
+
+                            <!-- Labels -->
+                            <text
+                                x="30"
+                                y="170"
+                                fill="#555"
+                                font-size="9"
+                                font-family="monospace"
+                            >
+                                → straight ahead
+                            </text>
+                            <text
+                                x="348"
+                                y="90"
+                                fill="#888"
+                                font-size="9"
+                                font-family="monospace"
+                            >
+                                ↗ divert
+                            </text>
+                        </svg>
+                        <button
+                            class="lever-btn pull"
+                            id="leverBtn"
+                            onclick="pullLever()"
+                        >
+                            Pull Lever
+                        </button>
+                    </div>
+                    <div class="trolley-controls">
+                        <div>
+                            <div
+                                class="trolley-choice-header"
+                                id="trolleyHeader"
+                            >
+                                What should you do?
+                            </div>
+                            <p
+                                class="trolley-prompt"
+                                id="trolleyPrompt"
+                                style="margin-top: 0.5rem"
+                            >
+                                A runaway trolley is heading toward
+                                <strong>5 people</strong> tied to the track. You
+                                can pull a lever to divert it to a side track —
+                                where <strong>1 person</strong> is tied. You
+                                have seconds to decide. What does each ethical
+                                theory say?
+                            </p>
+                        </div>
+                        <div class="trolley-votes">
+                            <button
+                                class="vote-btn"
+                                id="btn-pull"
+                                onclick="chooseTrolley('pull')"
+                            >
+                                <span class="vote-label c"
+                                    >Consequentialist View</span
+                                >
+                                <span class="vote-text"
+                                    >Pull the lever — save 5 lives, even at the
+                                    cost of 1. The math is clear.</span
+                                >
+                            </button>
+                            <button
+                                class="vote-btn"
+                                id="btn-nopull"
+                                onclick="chooseTrolley('nopull')"
+                            >
+                                <span class="vote-label d"
+                                    >Deontological View</span
+                                >
+                                <span class="vote-text"
+                                    >Don't pull — you'd be actively redirecting
+                                    harm and killing someone. You can't use a
+                                    person as a means.</span
+                                >
+                            </button>
+                        </div>
+                        <div class="verdict-box" id="trolleyVerdict">
+                            <div
+                                class="verdict-title mono"
+                                style="color: var(--electric)"
+                            >
+                                ↳ The Verdict
+                            </div>
+                            <div
+                                class="verdict-body"
+                                id="trolleyVerdictText"
+                            ></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footbridge variant -->
+                <div class="card reveal" style="margin-top: 2rem">
+                    <div
+                        class="card-accent"
+                        style="
+                            background: linear-gradient(
+                                90deg,
+                                var(--neon),
+                                transparent
+                            );
+                        "
+                    ></div>
+                    <div style="margin-top: 0.5rem">
+                        <span class="theory-tag-inline d"
+                            >Variant: The Footbridge</span
+                        >
+                        <h3
+                            style="
+                                font-family:
+                                    &quot;Playfair Display&quot;, serif;
+                                font-size: 1.25rem;
+                                margin-bottom: 0.75rem;
+                            "
+                        >
+                            Now push the giant man?
+                        </h3>
+                        <p
+                            style="
+                                color: rgba(245, 240, 232, 0.7);
+                                font-size: 0.92rem;
+                            "
+                        >
+                            Same trolley, same 5 people — but now there's no
+                            lever. You're on a bridge above the track. Next to
+                            you stands a very large man whose body, if pushed,
+                            would stop the trolley. He would die, but 5 would be
+                            saved.
+                        </p>
+                        <div class="pullquote neon" style="margin-top: 1.5rem">
+                            Most people say: <em>don't push.</em> But if
+                            consequences are all that matter, why is this
+                            different from pulling the lever?
+                            <cite
+                                >Chapman, Andrew. "Deontology: Kantian Ethics."
+                                1000-Word Philosophy, 2014.</cite
+                            >
+                        </div>
+                        <p
+                            style="
+                                color: rgba(245, 240, 232, 0.7);
+                                font-size: 0.92rem;
+                                margin-top: 1rem;
+                            "
+                        >
+                            <strong style="color: var(--neon)"
+                                >Kant's answer:</strong
+                            >
+                            Pushing the man uses him as a <em>mere means</em> —
+                            a sack of bones to stop a trolley. This violates the
+                            Second Formulation of the Categorical Imperative:
+                            you must always treat persons as ends in themselves,
+                            never merely as instruments. Pulling the lever, by
+                            contrast, redirects a threat; the one person's death
+                            is a tragic side-effect, not the method.
+                        </p>
+                        <p
+                            style="
+                                color: rgba(245, 240, 232, 0.7);
+                                font-size: 0.92rem;
+                                margin-top: 0.75rem;
+                            "
+                        >
+                            <strong style="color: var(--electric)"
+                                >Consequentialist answer:</strong
+                            >
+                            Logically, push. Five lives outweigh one. The means
+                            of saving them shouldn't change the arithmetic of
+                            outcomes.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SCENARIO ENGINE -->
+        <section id="scenarios">
+            <div class="container">
+                <div class="section-label">Module 03 — Apply It</div>
+                <h2 class="section-title reveal">Scenario Lab</h2>
+                <p
+                    class="reveal"
+                    style="color: rgba(245, 240, 232, 0.65); max-width: 640px"
+                >
+                    Read the scenario. Pick the response that fits the theory
+                    named. Build your moral philosophy muscles.
+                </p>
+                <div class="scenario-card reveal">
+                    <div class="scenario-header">
+                        <span class="scenario-num mono" id="scenarioNum"
+                            >Scenario 01 / 04</span
+                        >
+                        <div class="scenario-nav">
+                            <button class="snav-btn" onclick="prevScenario()">
+                                ←
+                            </button>
+                            <button class="snav-btn" onclick="nextScenario()">
+                                →
+                            </button>
+                        </div>
+                    </div>
+                    <div class="scenario-body">
+                        <div class="score-bar">
+                            <div class="score-label">
+                                <span>Progress</span>
+                                <span id="scoreText">0 / 4 correct</span>
+                            </div>
+                            <div class="progress-track">
+                                <div
+                                    class="progress-fill c"
+                                    id="scoreBar"
+                                    style="width: 0%"
+                                ></div>
+                            </div>
+                        </div>
+                        <div
+                            id="scenarioContent"
+                            style="margin-top: 2rem"
+                        ></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- DEEP DIVE -->
+        <section id="deepdive">
+            <div class="container">
+                <div class="section-label">Module 04 — Go Deeper</div>
+                <h2 class="section-title reveal">Concepts Worth Knowing</h2>
+                <p
+                    class="reveal"
+                    style="
+                        color: rgba(245, 240, 232, 0.65);
+                        max-width: 640px;
+                        margin-bottom: 2.5rem;
+                    "
+                >
+                    Tap any concept to expand its full explanation, drawn
+                    directly from your course readings.
+                </p>
+                <div id="accordion">
+                    <!-- Items generated by JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- QUIZ -->
+        <section id="quiz">
+            <div class="container">
+                <div class="section-label">Module 05 — Test Yourself</div>
+                <h2 class="section-title reveal">Knowledge Check</h2>
+                <p
+                    class="reveal"
+                    style="color: rgba(245, 240, 232, 0.65); max-width: 640px"
+                >
+                    7 questions. No time limit. Prove you can think like a
+                    philosopher — or a utilitarian, at least.
+                </p>
+                <div class="quiz-wrap reveal">
+                    <div class="quiz-bg-text" id="quizBgText">?</div>
+                    <div class="quiz-progress-dots" id="quizDots"></div>
+                    <div id="quizArea"></div>
+                    <div class="quiz-result" id="quizResult">
+                        <div class="quiz-score" id="finalScore">0/7</div>
+                        <div class="quiz-score-label">
+                            Questions Answered Correctly
+                        </div>
+                        <div
+                            id="quizResultMsg"
+                            style="
+                                margin-top: 1rem;
+                                font-size: 0.95rem;
+                                color: rgba(245, 240, 232, 0.7);
+                            "
+                        ></div>
+                        <button class="quiz-restart" onclick="restartQuiz()">
+                            Retake Quiz
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CITATIONS -->
+        <section id="citations">
+            <div class="container">
+                <div class="section-label">Chicago Style Bibliography</div>
+                <h2 class="section-title reveal">Works Cited</h2>
+                <div class="cite-block reveal">
+                    <div class="cite-entry">
+                        <span class="cite-author">Chapman, Andrew.</span> "<span
+                            class="cite-title"
+                            >Deontology: Kantian Ethics.</span
+                        >"
+                        <i>1000-Word Philosophy: An Introductory Anthology</i>.
+                        1000wordphilosophy.com, June 9, 2014. Revised June 29,
+                        2020.
+                    </div>
+                    <div class="cite-entry">
+                        <span class="cite-author">Gaier, Robyn.</span>
+                        <i>Philosophy 101: Philosophy and the Good Life</i>,
+                        PHIL 101 sec. 07. Gannon University, Spring Semester
+                        2026. Course syllabus.
+                    </div>
+                    <div class="cite-entry">
+                        <span class="cite-author">Galle, Per.</span> "<span
+                            class="cite-title"
+                            >Philosophy of Design: An Introduction.</span
+                        >" Centre for Design Research, Danmarks Designskole,
+                        2007. Revised January 16, 2009. http://www.cephad.org.
+                    </div>
+                    <div class="cite-entry">
+                        <span class="cite-author">Gronholz, Shane.</span> "<span
+                            class="cite-title"
+                            >Consequentialism and Utilitarianism.</span
+                        >"
+                        <i>1000-Word Philosophy: An Introductory Anthology</i>.
+                        1000wordphilosophy.com, May 15, 2014.
+                    </div>
+                    <div class="cite-entry">
+                        <span class="cite-author">Guignon, Charles</span>, ed.
+                        <i>The Good Life</i>. Indianapolis: Hackett Publishing
+                        Company, 1999.
+                    </div>
+                    <div class="cite-entry">
+                        <span class="cite-author">Kant, Immanuel.</span>
+                        <i>Practical Philosophy</i>. Translated by Allen W.
+                        Wood. Cambridge: Cambridge University Press, 1999.
+                    </div>
+                    <div class="cite-entry">
+                        <span class="cite-author">Mill, John Stuart.</span>
+                        <i>Utilitarianism</i>. 1861.
+                    </div>
+                </div>
+                <p
+                    style="
+                        margin-top: 1rem;
+                        font-size: 0.8rem;
+                        color: var(--muted);
+                        font-style: italic;
+                    "
+                >
+                    Citations formatted per Chicago Manual of Style, 17th
+                    edition (Notes–Bibliography style), as outlined in the
+                    Purdue University On-Campus Writing Lab guide. Authors'
+                    names inverted in bibliography; titles of major works
+                    italicized; shorter works in quotation marks.
+                </p>
+            </div>
+        </section>
+
+        <footer>
+            <p>
+                The Ethics Lab · PHIL 101 Study Resource · Gannon University
+                Spring 2026
+            </p>
+            <p style="margin-top: 0.5rem; font-size: 0.75rem">
+                Built for educational use. Content based on course readings.
+            </p>
+        </footer>
+
+        <script>
+            // ── SCROLL REVEAL ──
+            const observer = new IntersectionObserver(
+                (entries) =>
+                    entries.forEach((e) => {
+                        if (e.isIntersecting) e.target.classList.add("visible");
+                    }),
+                { threshold: 0.12 },
+            );
+            document
+                .querySelectorAll(".reveal")
+                .forEach((el) => observer.observe(el));
+
+            // ── TROLLEY ANIMATION ──
+            let leverPulled = false;
+            let choiceMade = false;
+            let idleRafId = null;
+            let choiceRafId = null;
+
+            // Idle loop: tram rolls in from left, slows near the branch point, fades out, resets
+            (function idleLoop() {
+                const obj = document.getElementById("trolleyObj");
+                if (!obj) return;
+                let x = -80; // start off-screen left
+                const PAUSE_AT = 255; // slow near the switch
+                const END_AT = 310; // fade out here
+
+                function ease(t) {
+                    return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+                }
+
+                function tick() {
+                    if (choiceMade) return; // hand off to choice animation
+
+                    // Speed: fast approaching, slow near branch, stop at switch
+                    let speed;
+                    if (x < PAUSE_AT - 60) {
+                        speed = 3.2;
+                    } else {
+                        // decelerate smoothly from 3.2 → 0.6 as x approaches PAUSE_AT
+                        const t = Math.min((x - (PAUSE_AT - 60)) / 60, 1);
+                        speed = 3.2 - ease(t) * 2.6;
+                    }
+
+                    x += speed;
+
+                    // Gentle opacity fade-out as tram disappears "into" the branch decision
+                    let opacity = 1;
+                    if (x > PAUSE_AT) {
+                        opacity = Math.max(
+                            0,
+                            1 - (x - PAUSE_AT) / (END_AT - PAUSE_AT),
+                        );
+                    }
+
+                    obj.setAttribute("transform", `translate(${x}, 0)`);
+                    obj.style.opacity = opacity;
+
+                    if (x < END_AT) {
+                        idleRafId = requestAnimationFrame(tick);
+                    } else {
+                        // Reset and loop after a brief pause
+                        obj.style.opacity = 0;
+                        obj.setAttribute("transform", "translate(-80, 0)");
+                        x = -80;
+                        setTimeout(() => {
+                            obj.style.opacity = 1;
+                            idleRafId = requestAnimationFrame(tick);
+                        }, 900);
+                    }
+                }
+
+                idleRafId = requestAnimationFrame(tick);
+            })();
+
+            function pullLever() {
+                if (choiceMade) return;
+                leverPulled = !leverPulled;
+                const line = document.getElementById("lever-line");
+                const btn = document.getElementById("leverBtn");
+                if (leverPulled) {
+                    line.setAttribute("x2", "320");
+                    line.setAttribute("y2", "116");
+                    btn.textContent = "Release Lever";
+                } else {
+                    line.setAttribute("x2", "300");
+                    line.setAttribute("y2", "116");
+                    btn.textContent = "Pull Lever";
+                }
+            }
+
+            function chooseTrolley(choice) {
+                const btnPull = document.getElementById("btn-pull");
+                const btnNoPull = document.getElementById("btn-nopull");
+                const verdict = document.getElementById("trolleyVerdict");
+                const verdictText =
+                    document.getElementById("trolleyVerdictText");
+
+                btnPull.className = "vote-btn";
+                btnNoPull.className = "vote-btn";
+
+                if (choice === "pull") {
+                    btnPull.classList.add("active-c");
+                    verdictText.innerHTML = `<strong style="color:var(--electric)">Consequentialist verdict: PULL IT.</strong> Five lives saved outweigh one lost. Utilitarianism demands we maximize net well-being across all affected parties. As Shane Gronholz explains, "Consequentialists typically argue that we are obligated to do whatever action has the best overall consequences, for all who are affected by the action." Pulling the lever produces a better world — five grieving families prevented versus one.<br><br><em style="color:var(--muted)">Gronholz, "Consequentialism and Utilitarianism," 1000-Word Philosophy, 2014.</em>`;
+                } else {
+                    btnNoPull.classList.add("active-d");
+                    verdictText.innerHTML = `<strong style="color:var(--neon)">Deontological verdict: complicated.</strong> Kant's framework requires asking whether you're treating people as ends in themselves. Pulling the lever redirects a threat — the one person's death is a tragic side effect, not your goal. Many Kantians actually <em>permit</em> pulling. But <strong>pushing a person</strong> onto the tracks is categorically different: you'd be using their body as an instrument, violating the Second Formulation. Chapman notes: "His death is an unfortunate and unintended consequence of our attempt to save five lives."<br><br><em style="color:var(--muted)">Chapman, "Deontology: Kantian Ethics," 1000-Word Philosophy, 2014.</em>`;
+                }
+                verdict.classList.add("show");
+                runTrolleyChoice(choice === "pull");
+            }
+
+            function runTrolleyChoice(divert) {
+                // Stop the idle loop
+                choiceMade = true;
+                if (idleRafId) cancelAnimationFrame(idleRafId);
+
+                const obj = document.getElementById("trolleyObj");
+                obj.style.opacity = 1;
+
+                let x = -80,
+                    y = 0;
+
+                function step() {
+                    // Accelerate into the scene, then cruise
+                    const speed = x < 200 ? 4.5 : 3.2;
+                    x += speed;
+
+                    // Arc smoothly up onto the branch track if diverting
+                    if (divert && x > 270) {
+                        const t = Math.min((x - 270) / 140, 1);
+                        // smooth ease-in-out arc
+                        const arc = t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+                        y = -arc * 30;
+                    }
+
+                    obj.setAttribute("transform", `translate(${x}, ${y})`);
+
+                    const stopX = divert ? 430 : 600;
+                    if (x < stopX) {
+                        choiceRafId = requestAnimationFrame(step);
+                    } else {
+                        // Tram rolls off screen gently — no crash, just disappears
+                        obj.style.transition = "opacity 0.6s";
+                        obj.style.opacity = 0;
+
+                        // After a pause, reset everything and restart idle
+                        setTimeout(() => {
+                            choiceMade = false;
+                            obj.style.transition = "";
+                            obj.style.opacity = 1;
+                            obj.setAttribute("transform", "translate(-80, 0)");
+                            // Restore lever
+                            const line = document.getElementById("lever-line");
+                            leverPulled = false;
+                            line.setAttribute("x2", "300");
+                            line.setAttribute("y2", "116");
+                            document.getElementById("leverBtn").textContent =
+                                "Pull Lever";
+                            // Restart idle
+                            (function restartIdle() {
+                                let rx = -80;
+                                const PAUSE_AT = 255,
+                                    END_AT = 310;
+                                function ease(t) {
+                                    return t < 0.5
+                                        ? 2 * t * t
+                                        : -1 + (4 - 2 * t) * t;
+                                }
+                                function tick() {
+                                    if (choiceMade) return;
+                                    let speed;
+                                    if (rx < PAUSE_AT - 60) {
+                                        speed = 3.2;
+                                    } else {
+                                        const t = Math.min(
+                                            (rx - (PAUSE_AT - 60)) / 60,
+                                            1,
+                                        );
+                                        speed = 3.2 - ease(t) * 2.6;
+                                    }
+                                    rx += speed;
+                                    let opacity = 1;
+                                    if (rx > PAUSE_AT)
+                                        opacity = Math.max(
+                                            0,
+                                            1 -
+                                                (rx - PAUSE_AT) /
+                                                    (END_AT - PAUSE_AT),
+                                        );
+                                    obj.setAttribute(
+                                        "transform",
+                                        `translate(${rx}, 0)`,
+                                    );
+                                    obj.style.opacity = opacity;
+                                    if (rx < END_AT) {
+                                        idleRafId = requestAnimationFrame(tick);
+                                    } else {
+                                        obj.style.opacity = 0;
+                                        obj.setAttribute(
+                                            "transform",
+                                            "translate(-80, 0)",
+                                        );
+                                        rx = -80;
+                                        setTimeout(() => {
+                                            obj.style.opacity = 1;
+                                            idleRafId =
+                                                requestAnimationFrame(tick);
+                                        }, 900);
+                                    }
+                                }
+                                idleRafId = requestAnimationFrame(tick);
+                            })();
+                        }, 2200);
+                    }
+                }
+                choiceRafId = requestAnimationFrame(step);
+            }
+
+            // ── SCENARIOS ──
+            const scenarios = [
+                {
+                    id: 1,
+                    title: "The Deathbed Promise",
+                    text: "Your friend, on her deathbed, makes you promise to scatter her ashes in the Rocky Mountains. After her death, you realize it would be much more convenient to simply flush them down the toilet. No one would ever know. No one would be harmed. What would a consequentialist say?",
+                    theory: "consequentialist",
+                    choices: [
+                        {
+                            label: "c",
+                            tag: "Consequentialist",
+                            text: "Flush them — if there are truly zero bad consequences (no one knows, no one suffers), then there is nothing wrong with this act.",
+                            correct: true,
+                        },
+                        {
+                            label: "d",
+                            tag: "Deontological",
+                            text: "Honor the promise — you made a commitment, a duty exists regardless of whether anyone finds out.",
+                            correct: false,
+                        },
+                    ],
+                    reveal: "Consequentialism says: if an action has <em>no bad consequences whatsoever</em>, it's morally permissible — or even obligatory if it produces good ones. Gronholz writes: 'Since this act appears to have no bad consequences, consequentialism entails there would be nothing wrong with this.' Most of us feel uneasy, which suggests consequences might not be the whole story.",
+                    cite: 'Gronholz, Shane. "Consequentialism and Utilitarianism." 1000-Word Philosophy, 2014.',
+                },
+                {
+                    id: 2,
+                    title: "The Murderer at the Door",
+                    text: "A known murderer knocks on your door and asks where your friend is, clearly intending to kill them. Your friend is hiding in your house. What does strict Kantian ethics say about lying to the murderer?",
+                    theory: "deontological",
+                    choices: [
+                        {
+                            label: "c",
+                            tag: "Consequentialist",
+                            text: "Lie — obviously lying produces much better outcomes than telling the truth. Save your friend.",
+                            correct: false,
+                        },
+                        {
+                            label: "d",
+                            tag: "Strict Kantian",
+                            text: "Don't lie — lying universalized fails the Categorical Imperative, and lying uses the murderer's rational nature as a means by manipulating them.",
+                            correct: true,
+                        },
+                    ],
+                    reveal: "Kant himself argued you should not lie — even to the murderer. Lying universalized leads to a world where no one trusts language, undercutting the very practice of communicating. However, Chapman notes that even Kantians debate this: <em>'I will lie when doing so will very likely save innocent people\'s lives' can be willed as a universal law — neither chaos nor contradictions result.</em> This is one of Kant's most criticized positions.",
+                    cite: 'Chapman, Andrew. "Deontology: Kantian Ethics." 1000-Word Philosophy, 2014.',
+                },
+                {
+                    id: 3,
+                    title: "The Celebrity Organs",
+                    text: "Five famous celebrities need organ transplants and will soon die. Doctors notice your organs are perfect matches. A plan is proposed: secretly kill you to save the five celebrities and their millions of grieving fans. From a pure consequentialist view, this could be justified. But is it?",
+                    theory: "critique",
+                    choices: [
+                        {
+                            label: "c",
+                            tag: "Pure Consequentialist Argument",
+                            text: "If the total happiness of five lives (plus millions of fans) outweighs one life, consequentialism struggles to call this wrong.",
+                            correct: true,
+                        },
+                        {
+                            label: "d",
+                            tag: "Deontological Argument",
+                            text: "Clearly wrong — killing an innocent person violates their dignity as a person and treats them as a mere means to others' ends.",
+                            correct: false,
+                        },
+                    ],
+                    reveal: "This is one of consequentialism's biggest problems. Gronholz writes: 'It\'s hard to see how a consequentialist could explain how this is wrong. And yet, we tend to think this would be profoundly wrong.' This scenario — murdering an innocent to save more people — is exactly the kind of case that motivates deontological thinking: some acts are simply off-limits, no matter the math.",
+                    cite: 'Gronholz, Shane. "Consequentialism and Utilitarianism." 1000-Word Philosophy, 2014.',
+                },
+                {
+                    id: 4,
+                    title: "The Universal Law Test",
+                    text: "You're considering sneaking into a movie without paying. Kant's first formulation asks: can you will your maxim to become a universal law? What happens if everyone followed the rule 'I will sneak into movies to see them for free'?",
+                    theory: "deontological",
+                    choices: [
+                        {
+                            label: "d",
+                            tag: "Kantian First Formulation",
+                            text: "It fails — if everyone did it, movies would not be profitable, no one would make them, and the very thing you wanted (free movies) would cease to exist.",
+                            correct: true,
+                        },
+                        {
+                            label: "c",
+                            tag: "Consequentialist View",
+                            text: "If your individual sneaking causes no measurable harm, it might be permissible on a case-by-case basis.",
+                            correct: false,
+                        },
+                    ],
+                    reveal: "The First Formulation of the Categorical Imperative: <em>'Act only in accordance with that maxim through which you can at the same time will that it become a universal law.'</em> Chapman explains that your maxim ('I will sneak into a movie to see it for free') would self-destruct if universalized — nobody would make movies, destroying the whole institution. This is why rule-breaking is wrong for Kant: not consequences, but rational consistency.",
+                    cite: 'Chapman, Andrew. "Deontology: Kantian Ethics." 1000-Word Philosophy, 2014.',
+                },
+            ];
+
+            let currentScenario = 0;
+            let scenarioAnswered = new Array(scenarios.length).fill(false);
+            let scenarioScore = 0;
+
+            function renderScenario() {
+                const s = scenarios[currentScenario];
+                document.getElementById("scenarioNum").textContent =
+                    `Scenario 0${currentScenario + 1} / 0${scenarios.length}`;
+                document.getElementById("scoreText").textContent =
+                    `${scenarioScore} / ${scenarios.length} correct`;
+                document.getElementById("scoreBar").style.width =
+                    `${(scenarioScore / scenarios.length) * 100}%`;
+
+                const answered = scenarioAnswered[currentScenario];
+                const choicesHTML = s.choices
+                    .map((c, i) => {
+                        let cls = "choice-btn";
+                        if (answered) {
+                            cls += c.correct ? " picked-c" : " wrong";
+                        }
+                        return `<button class="${cls}" onclick="answerScenario(${i})" ${answered ? "disabled" : ""}>
+      <span class="choice-tag ${c.label}">${c.tag}</span>
+      <span class="choice-text">${c.text}</span>
+    </button>`;
+                    })
+                    .join("");
+
+                const revealHTML = answered
+                    ? `
+    <div class="scenario-reveal show">
+      <div class="reveal-heading">
+        <span class="dot dot-c"></span> Analysis
+      </div>
+      <div class="reveal-text">${s.reveal}<br><br><em style="color:var(--muted); font-size:0.82rem;">${s.cite}</em></div>
+    </div>`
+                    : `<div class="scenario-reveal" id="revealBox"></div>`;
+
+                document.getElementById("scenarioContent").innerHTML = `
+    <h3 class="scenario-title">${s.title}</h3>
+    <p class="scenario-text">${s.text}</p>
+    <div class="scenario-choices">${choicesHTML}</div>
+    ${revealHTML}
+  `;
+            }
+
+            function answerScenario(choiceIdx) {
+                if (scenarioAnswered[currentScenario]) return;
+                const s = scenarios[currentScenario];
+                const correct = s.choices[choiceIdx].correct;
+                if (correct && !scenarioAnswered[currentScenario])
+                    scenarioScore++;
+                scenarioAnswered[currentScenario] = true;
+                renderScenario();
+            }
+
+            function nextScenario() {
+                currentScenario = (currentScenario + 1) % scenarios.length;
+                renderScenario();
+            }
+            function prevScenario() {
+                currentScenario =
+                    (currentScenario - 1 + scenarios.length) % scenarios.length;
+                renderScenario();
+            }
+
+            renderScenario();
+
+            // ── ACCORDION ──
+            const accordionItems = [
+                {
+                    tag: "c",
+                    tagLabel: "Consequentialism",
+                    title: "The Categorical Imperative — First Formulation",
+                    tagType: "d",
+                    body: `<span class="theory-tag-inline d">Deontology</span>
+    <p>Kant's first formulation: <strong>"Act only in accordance with that maxim through which you can at the same time will that it become a universal law."</strong></p>
+    <p style="margin-top:0.75rem;">A <em>maxim</em> is a principle for acting in a certain way to achieve a goal. The test: could everyone follow this principle without contradiction or self-defeat? If I want to steal something, my maxim is "I'll take what I want." But if everyone stole, ownership itself would collapse — and theft requires ownership. The maxim is self-defeating when universalized.</p>
+    <p style="margin-top:0.75rem; color:var(--muted); font-size:0.85rem; font-style:italic;">Chapman, "Deontology: Kantian Ethics," 2014.</p>`,
+                },
+                {
+                    tag: "d",
+                    tagLabel: "Deontology",
+                    title: "The Categorical Imperative — Second Formulation",
+                    tagType: "d",
+                    body: `<span class="theory-tag-inline d">Deontology</span>
+    <p>The second formulation: <strong>"Act in such a way that you treat humanity, whether in your own person or in the person of any other, never merely as a means to an end, but always at the same time as an end."</strong></p>
+    <p style="margin-top:0.75rem;">This prohibits using people as tools. Deceiving, manipulating, or coercing someone denies their rational autonomy — treating them as an object rather than a person deserving respect. Note the word <em>merely</em>: you may involve people instrumentally (hiring workers, taking taxis) as long as you simultaneously respect their personhood.</p>
+    <p style="margin-top:0.75rem; color:var(--muted); font-size:0.85rem; font-style:italic;">Chapman, "Deontology: Kantian Ethics," 2014.</p>`,
+                },
+                {
+                    tag: "c",
+                    tagLabel: "Consequentialism",
+                    title: "Utilitarianism: Maximizing Happiness",
+                    tagType: "c",
+                    body: `<span class="theory-tag-inline c">Consequentialism</span>
+    <p>Utilitarianism, developed by Jeremy Bentham (1823) and refined by John Stuart Mill (1861), holds that the right action is the one that produces the greatest happiness for the greatest number. "Happiness" can be understood as pleasure minus pain.</p>
+    <p style="margin-top:0.75rem;">Mill argued: "All action is for the sake of some end, and rules of action must take their whole character and colour from the end to which they are subservient." This grounds morality entirely in outcomes — specifically, in well-being.</p>
+    <p style="margin-top:0.75rem; color:var(--muted); font-size:0.85rem; font-style:italic;">Gronholz, "Consequentialism and Utilitarianism," 2014.</p>`,
+                },
+                {
+                    tag: "c",
+                    title: "Rule-Consequentialism: A Middle Ground?",
+                    tagType: "both",
+                    body: `<span class="theory-tag-inline both">Hybrid View</span>
+    <p><strong>Act-consequentialism</strong> says: evaluate each action by its consequences. But this leads to uncomfortable conclusions (organ harvesting, broken promises if no one notices).</p>
+    <p style="margin-top:0.75rem;"><strong>Rule-consequentialism</strong> says: instead of evaluating acts, follow rules that, when generally followed, produce good consequences. E.g., "Never torture" — even if one specific torture might technically cause less harm, the rule against it produces better outcomes than case-by-case reasoning.</p>
+    <p style="margin-top:0.75rem;">Gronholz flags the problem: "If what you care about are the consequences, and you realize you could bring about better consequences by breaking the rule, why would you continue to abide by the rule?" Rule-consequentialism seems to undercut its own foundation.</p>
+    <p style="margin-top:0.75rem; color:var(--muted); font-size:0.85rem; font-style:italic;">Gronholz, "Consequentialism and Utilitarianism," 2014.</p>`,
+                },
+                {
+                    title: "What Is a 'Person' for Kant?",
+                    tagType: "d",
+                    body: `<span class="theory-tag-inline d">Deontology</span>
+    <p>Kant grounds all moral worth in <strong>rational personhood</strong>. A "person" in the moral sense is any self-conscious, reasons-responsive, autonomous creature — not simply a human being. This has radical implications:</p>
+    <ul style="margin-top:0.75rem; padding-left:1.25rem; line-height:2;">
+      <li>Some non-human animals (apes, dolphins) might qualify as persons</li>
+      <li>Future AI systems could count as persons if sufficiently rational</li>
+      <li>Some humans (the very young, severely cognitively limited) might not qualify in the <em>moral</em> sense</li>
+    </ul>
+    <p style="margin-top:0.75rem;">Only rational beings can act with a <em>good will</em> — recognizing moral reasons and acting because those reasons are right. This is what makes persons uniquely worthy of respect.</p>
+    <p style="margin-top:0.75rem; color:var(--muted); font-size:0.85rem; font-style:italic;">Chapman, "Deontology: Kantian Ethics," 2014, fn. 5.</p>`,
+                },
+                {
+                    title: "Hypothetical vs. Categorical Imperatives",
+                    tagType: "d",
+                    body: `<span class="theory-tag-inline d">Deontology</span>
+    <p><strong>Hypothetical imperatives</strong> are conditional: "If you want X, do Y." They bind us only if we have certain desires. "Study math if you want to master it." If you don't care about math, the rule doesn't apply to you.</p>
+    <p style="margin-top:0.75rem;"><strong>Categorical imperatives</strong> are unconditional: "Do Y, period." They apply to all rational beings regardless of wants. "Don't lie and manipulate people for personal gain" — this applies even if you'd benefit from lying and have no desire to be honest.</p>
+    <p style="margin-top:0.75rem;">For Kant, genuine morality must be categorical: moral duties cannot depend on what you happen to want at the moment.</p>
+    <p style="margin-top:0.75rem; color:var(--muted); font-size:0.85rem; font-style:italic;">Chapman, "Deontology: Kantian Ethics," 2014, fn. 6.</p>`,
+                },
+            ];
+
+            const accordionEl = document.getElementById("accordion");
+            accordionItems.forEach((item, i) => {
+                const div = document.createElement("div");
+                div.className = "accordion-item reveal";
+                div.innerHTML = `
+    <button class="accordion-trigger" onclick="toggleAccordion(${i})">
+      <span>${item.title}</span>
+      <span class="accordion-icon">+</span>
+    </button>
+    <div class="accordion-content">
+      <div class="accordion-inner">${item.body}</div>
+    </div>
+  `;
+                accordionEl.appendChild(div);
+                observer.observe(div);
+            });
+
+            function toggleAccordion(i) {
+                const items = document.querySelectorAll(".accordion-item");
+                items.forEach((it, idx) => {
+                    if (idx === i) it.classList.toggle("open");
+                    else it.classList.remove("open");
+                });
+            }
+
+            // ── QUIZ ──
+            const quizData = [
+                {
+                    q: "According to consequentialism, what determines whether an action is morally right?",
+                    opts: [
+                        "Whether it follows a universal moral rule",
+                        "Whether it produces the best overall consequences for all affected",
+                        "Whether it respects the dignity of persons",
+                        "Whether it fulfills a promise or duty",
+                    ],
+                    answer: 1,
+                    feedback:
+                        "Correct! Consequentialism evaluates actions solely by their outcomes. As Gronholz explains: 'The consequences of an action are all that matter in moral assessment.' (Gronholz, 2014)",
+                },
+                {
+                    q: "Kant's First Formulation of the Categorical Imperative asks you to act only on a maxim that you can will to become a ___________.",
+                    opts: [
+                        "beneficial outcome",
+                        "negotiated compromise",
+                        "universal law",
+                        "personal preference",
+                    ],
+                    answer: 2,
+                    feedback:
+                        "Correct! The First Formulation: 'Act only in accordance with that maxim through which you can at the same time will that it become a universal law.' (Chapman, 2014)",
+                },
+                {
+                    q: "In the trolley problem's 'footbridge' variant, why do most people feel differently about pushing the giant man vs. pulling a lever?",
+                    opts: [
+                        "The math is different — five vs. one changes the calculation",
+                        "Pushing uses the man as a mere means to an end, violating his personhood",
+                        "It is always wrong to save five people",
+                        "The footbridge scenario involves a different number of victims",
+                    ],
+                    answer: 1,
+                    feedback:
+                        "The Kantian explanation: 'In the giant-man variant, pushing him in front of the train does use him — as a mere sack of sinew and bones, no better than a rock.' Pulling the lever redirects; pushing instrumentalizes. (Chapman, 2014)",
+                },
+                {
+                    q: "What is the most prominent version of consequentialism, which holds that we should maximize total happiness?",
+                    opts: [
+                        "Deontology",
+                        "Virtue Ethics",
+                        "Utilitarianism",
+                        "Rule-Consequentialism",
+                    ],
+                    answer: 2,
+                    feedback:
+                        "Utilitarianism, associated with Jeremy Bentham and John Stuart Mill, holds that the right action increases total happiness and decreases total pain for all affected. (Gronholz, 2014)",
+                },
+                {
+                    q: "Kant argued that even if a known murderer asks where your friend is, you should not lie to them. What does this illustrate about his ethics?",
+                    opts: [
+                        "Kant was too focused on good consequences",
+                        "Deontological rules can demand rigid adherence even at great cost",
+                        "Kant endorsed helping murderers",
+                        "The Categorical Imperative has no exceptions",
+                    ],
+                    answer: 1,
+                    feedback:
+                        "This is one of Kant's most criticized positions. It illustrates the rigidity that deontological ethics can demand — and why many find pure deontology challenging in edge cases. Many contemporary Kantians argue lying to save a life can be universalized without contradiction. (Chapman, 2014)",
+                },
+                {
+                    q: "Rule-consequentialism says we should follow rules that produce good consequences when followed generally. What is a key problem with this view?",
+                    opts: [
+                        "Rules are impossible to follow consistently",
+                        "If consequences are what matter, why follow a rule when breaking it would produce better outcomes?",
+                        "Rules are too strict for everyday life",
+                        "It ignores happiness entirely",
+                    ],
+                    answer: 1,
+                    feedback:
+                        "Gronholz identifies this internal tension: 'If what you care about are the consequences, and you realize you could bring about better consequences by breaking the rule, why would you continue to abide by the rule? This view seems to undercut its very motivation.' (Gronholz, 2014)",
+                },
+                {
+                    q: "For Kant, what is it about persons that makes them deserving of unique moral respect?",
+                    opts: [
+                        "Their biological species membership",
+                        "Their capacity to feel pleasure and pain",
+                        "Their rationality — the ability to recognize moral reasons and act accordingly",
+                        "Their social relationships and community ties",
+                    ],
+                    answer: 2,
+                    feedback:
+                        "Kant grounds moral worth in rational personhood. Chapman explains: 'Rational beings are the only creatures that can act with a good will: recognize the existence of moral reasons and act such that one's reason for acting is that the action is morally required.' (Chapman, 2014)",
+                },
+            ];
+
+            let currentQ = 0;
+            let quizScore = 0;
+            let answered = false;
+
+            function buildQuizDots() {
+                const dots = document.getElementById("quizDots");
+                dots.innerHTML = quizData
+                    .map(
+                        (_, i) =>
+                            `<div class="qdot${i === 0 ? " current" : ""}"></div>`,
+                    )
+                    .join("");
+            }
+
+            function renderQuiz() {
+                const area = document.getElementById("quizArea");
+                const q = quizData[currentQ];
+                document.getElementById("quizBgText").textContent =
+                    `${currentQ + 1}`;
+                answered = false;
+                area.innerHTML = `
+    <div class="quiz-q">${q.q}</div>
+    <div class="quiz-options">
+      ${q.opts
+          .map(
+              (opt, i) => `
+        <button class="qopt" onclick="answerQuiz(${i})">
+          <span class="qopt-letter">${"ABCD"[i]}</span>
+          <span class="qopt-text">${opt}</span>
+        </button>
+      `,
+          )
+          .join("")}
+    </div>
+    <div class="quiz-feedback" id="qfeedback">
+      <div class="quiz-feedback-text" id="qfeedbackText"></div>
+    </div>
+    <button class="quiz-next" id="qnext" onclick="nextQuestion()">
+      ${currentQ < quizData.length - 1 ? "Next Question →" : "See Results →"}
+    </button>
+  `;
+                updateDots();
+            }
+
+            function updateDots() {
+                document.querySelectorAll(".qdot").forEach((d, i) => {
+                    d.className = "qdot";
+                    if (i < currentQ) d.classList.add("done");
+                    if (i === currentQ) d.classList.add("current");
+                });
+            }
+
+            function answerQuiz(i) {
+                if (answered) return;
+                answered = true;
+                const q = quizData[currentQ];
+                const opts = document.querySelectorAll(".qopt");
+                opts.forEach((opt, idx) => {
+                    opt.disabled = true;
+                    if (idx === q.answer) opt.classList.add("correct");
+                    else if (idx === i && i !== q.answer)
+                        opt.classList.add("incorrect");
+                });
+                if (i === q.answer) quizScore++;
+                const feedback = document.getElementById("qfeedback");
+                const feedbackText = document.getElementById("qfeedbackText");
+                feedbackText.textContent = q.feedback;
+                feedback.classList.add("show");
+                document.getElementById("qnext").style.display = "block";
+            }
+
+            function nextQuestion() {
+                currentQ++;
+                if (currentQ >= quizData.length) {
+                    showResult();
+                } else {
+                    renderQuiz();
+                }
+            }
+
+            function showResult() {
+                document.getElementById("quizArea").style.display = "none";
+                document.getElementById("quizDots").style.display = "none";
+                const result = document.getElementById("quizResult");
+                result.classList.add("show");
+                document.getElementById("finalScore").textContent =
+                    `${quizScore}/${quizData.length}`;
+                const pct = quizScore / quizData.length;
+                let msg;
+                if (pct === 1)
+                    msg =
+                        "Perfect score! You've mastered both ethical frameworks. Kant would approve of your rigor — and so would Mill.";
+                else if (pct >= 0.7)
+                    msg =
+                        "Strong work! You have a solid grasp of consequentialist and deontological reasoning. Review the deep dive section to sharpen any gaps.";
+                else if (pct >= 0.5)
+                    msg =
+                        "Good effort! The trolley problem isn't easy. Revisit the theory cards and accordion sections to solidify these concepts.";
+                else
+                    msg =
+                        "Keep going! Ethics takes time. Review the Theories section and try the scenario lab again before retaking the quiz.";
+                document.getElementById("quizResultMsg").textContent = msg;
+            }
+
+            function restartQuiz() {
+                currentQ = 0;
+                quizScore = 0;
+                answered = false;
+                document.getElementById("quizArea").style.display = "";
+                document.getElementById("quizDots").style.display = "";
+                document.getElementById("quizResult").classList.remove("show");
+                buildQuizDots();
+                renderQuiz();
+            }
+
+            buildQuizDots();
+            renderQuiz();
+        </script>
+    </body>
+</html>

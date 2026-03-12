@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <title>Ethics Lab — Consequentialism vs Deontology</title>
+
+        <script src="https://cdn.tailwindcss.com"></script>
+
+        <style>
+            body {
+                background: radial-gradient(circle at top, #111827, #020617);
+            }
+            .card {
+                transition: all 0.3s ease;
+            }
+            .card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            }
+        </style>
+    </head>
+
+    <body class="text-gray-200 font-sans">
+        <header class="text-center py-10 px-4">
+            <h1 class="text-4xl md:text-5xl font-bold text-indigo-400">
+                Ethics Lab
+            </h1>
+
+            <p class="mt-4 text-gray-300 max-w-xl mx-auto">
+                An interactive philosophy playground exploring
+                <strong>Consequentialism</strong> and
+                <strong>Kantian Deontology</strong>.
+            </p>
+        </header>
+
+        <section class="grid md:grid-cols-2 gap-6 px-6 max-w-5xl mx-auto">
+            <div class="card bg-gray-900 p-6 rounded-xl">
+                <h2 class="text-2xl font-semibold text-green-400">
+                    Consequentialism
+                </h2>
+
+                <p class="mt-3 text-gray-300">
+                    Consequentialism argues that the morality of an action is
+                    determined entirely by its consequences. The morally right
+                    action is the one that produces the best overall results for
+                    everyone affected.
+                </p>
+
+                <p class="text-sm text-gray-400 mt-3">
+                    Utilitarianism — a major version of consequentialism —
+                    evaluates outcomes based on total happiness and suffering.
+                </p>
+
+                <button
+                    onclick="showTheory('cons')"
+                    class="mt-4 bg-green-500 hover:bg-green-600 px-4 py-2 rounded"
+                >
+                    Explore
+                </button>
+            </div>
+
+            <div class="card bg-gray-900 p-6 rounded-xl">
+                <h2 class="text-2xl font-semibold text-indigo-400">
+                    Deontology
+                </h2>
+
+                <p class="mt-3 text-gray-300">
+                    Deontology holds that morality is grounded in duties and
+                    rules rather than consequences alone.
+                </p>
+
+                <p class="text-sm text-gray-400 mt-3">
+                    Immanuel Kant argued that moral rules arise from the
+                    <strong>Categorical Imperative</strong>, which requires that
+                    we act only on principles that could become universal laws
+                    and that we treat persons as ends rather than mere means.
+                </p>
+
+                <button
+                    onclick="showTheory('deon')"
+                    class="mt-4 bg-indigo-500 hover:bg-indigo-600 px-4 py-2 rounded"
+                >
+                    Explore
+                </button>
+            </div>
+        </section>
+
+        <section class="mt-16 px-6 max-w-4xl mx-auto">
+            <h2 class="text-3xl font-bold text-center text-yellow-400 mb-6">
+                Interactive Moral Dilemma
+            </h2>
+
+            <div class="bg-gray-900 rounded-xl p-6">
+                <p class="mb-4">
+                    A runaway trolley is about to kill five people on the
+                    tracks. You can pull a lever to divert it onto another track
+                    where it will kill one person instead.
+                </p>
+
+                <div class="flex gap-4 flex-wrap">
+                    <button
+                        onclick="choose('pull')"
+                        class="bg-green-500 hover:bg-green-600 px-4 py-2 rounded"
+                    >
+                        Pull the Lever
+                    </button>
+
+                    <button
+                        onclick="choose('nothing')"
+                        class="bg-red-500 hover:bg-red-600 px-4 py-2 rounded"
+                    >
+                        Do Nothing
+                    </button>
+                </div>
+
+                <div id="result" class="mt-6 text-lg"></div>
+            </div>
+        </section>
+
+        <section class="mt-16 px-6 max-w-5xl mx-auto">
+            <h2 class="text-3xl text-center text-purple-400 mb-8">
+                Decision Visualizer
+            </h2>
+
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-gray-900 p-6 rounded-xl">
+                    <h3 class="text-xl font-semibold text-green-400">
+                        Consequentialist Reasoning
+                    </h3>
+
+                    <ul class="mt-4 list-disc ml-5 text-gray-300">
+                        <li>Calculate outcomes</li>
+                        <li>Compare total happiness or suffering</li>
+                        <li>Choose action with best net result</li>
+                    </ul>
+
+                    <div class="mt-4 text-sm text-gray-400">
+                        Example: Save five instead of one.
+                    </div>
+                </div>
+
+                <div class="bg-gray-900 p-6 rounded-xl">
+                    <h3 class="text-xl font-semibold text-indigo-400">
+                        Kantian Reasoning
+                    </h3>
+
+                    <ul class="mt-4 list-disc ml-5 text-gray-300">
+                        <li>Ask if rule could be universal law</li>
+                        <li>Respect persons as ends</li>
+                        <li>Do not use people as mere means</li>
+                    </ul>
+
+                    <div class="mt-4 text-sm text-gray-400">
+                        Example: pushing someone may violate respect for
+                        persons.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mt-16 px-6 max-w-4xl mx-auto">
+            <h2 class="text-3xl text-center text-orange-400 mb-6">
+                Mini Ethics Quiz
+            </h2>
+
+            <div class="bg-gray-900 rounded-xl p-6">
+                <p class="mb-4">
+                    Is it morally acceptable to lie if it saves someone's life?
+                </p>
+
+                <div class="flex gap-4 flex-wrap">
+                    <button
+                        onclick="quiz('yes')"
+                        class="bg-green-600 px-4 py-2 rounded"
+                    >
+                        Yes
+                    </button>
+
+                    <button
+                        onclick="quiz('no')"
+                        class="bg-red-600 px-4 py-2 rounded"
+                    >
+                        No
+                    </button>
+                </div>
+
+                <div id="quizresult" class="mt-5 text-lg"></div>
+            </div>
+        </section>
+
+        <section class="mt-16 px-6 max-w-3xl mx-auto text-gray-400 text-sm">
+            <h3 class="text-xl text-white mb-3">Chicago-Style References</h3>
+
+            <p>
+                Andrew Chapman. “Deontology: Kantian Ethics.” 1000-Word
+                Philosophy.
+            </p>
+
+            <p>
+                Shane Gronholz. “Consequentialism and Utilitarianism.” 1000-Word
+                Philosophy.
+            </p>
+
+            <p class="mt-3">
+                Bentham, Jeremy. *An Introduction to the Principles of Morals
+                and Legislation*. 1823.
+            </p>
+
+            <p>Mill, John Stuart. *Utilitarianism*. 1861.</p>
+        </section>
+
+        <script>
+            function showTheory(type) {
+                if (type == "cons") {
+                    alert(
+                        "Consequentialism evaluates actions based on their outcomes. The morally right choice produces the best overall consequences.",
+                    );
+                }
+
+                if (type == "deon") {
+                    alert(
+                        "Kantian ethics evaluates actions based on duty and universal moral rules rather than consequences.",
+                    );
+                }
+            }
+
+            function choose(choice) {
+                let result = document.getElementById("result");
+
+                if (choice == "pull") {
+                    result.innerHTML =
+                        "A consequentialist would likely say pulling the lever is morally right because it saves more lives.";
+                }
+
+                if (choice == "nothing") {
+                    result.innerHTML =
+                        "Some deontologists might argue you are not responsible for actively causing a death.";
+                }
+            }
+
+            function quiz(answer) {
+                let result = document.getElementById("quizresult");
+
+                if (answer == "yes") {
+                    result.innerHTML =
+                        "Consequentialists often allow lying if it produces better outcomes.";
+                }
+
+                if (answer == "no") {
+                    result.innerHTML =
+                        "Kant argued that lying violates the categorical imperative because it manipulates others.";
+                }
+            }
+        </script>
+    </body>
+</html>
