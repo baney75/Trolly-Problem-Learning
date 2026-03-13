@@ -109,10 +109,24 @@ All implementations explore:
 
 ## 📝 Methodology
 
-1. **Prompt**: Each AI received the same request to create an interactive philosophy application
-2. **No Modifications**: Original AI-generated code was preserved (only READMEs added)
+### Original Prompt
+
+Each AI model received the following identical prompt:
+
+> "Based on all of these design a philosophical learning site to teach philosophy deeply for consequentialism and deontology in an easy to understand interactive visual manner for college students. Adhere to sources. Design Principles: Use Chicago style for citations. Make it fun, original, not like a cookie cutter site, and it MUST be functional on mobile. Either: 1. Create an html file with tailwind, js all in one file or 2. A full fledged project"
+
+### Process
+
+1. **Same Prompt**: Each AI received the identical request above
+2. **No Modifications**: Original AI-generated code preserved (only READMEs added)
 3. **Documentation**: Comprehensive READMEs created for each implementation
 4. **Showcase**: This comparison site built to highlight differences
+
+### Citation Policy
+
+- Default format: **Chicago 17th Edition** (as specified in prompt)
+- All implementations use Chicago-style citations for academic sources
+- Citations follow: Author, "Title," Source, Date format
 
 ## 🛠️ Local Development
 
