@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gemini Implementation - AI Ethics Experiments</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%2312121a' stroke='%234285f4' stroke-width='3'/%3E%3Cpath d='M30 50 L45 65 L70 35' stroke='%2310a37f' stroke-width='6' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3Ccircle cx='50' cy='30' r='8' fill='%23cc785c'/%3E%3C/svg%3E">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .gradient-bg {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #1a1a2e 100%);
+        }
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(66, 133, 244, 0.15);
+        }
+    </style>
+</head>
+<body class="bg-zinc-900 text-gray-100 min-h-screen">
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-zinc-900/95 backdrop-blur-sm border-b border-zinc-800">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="../" class="text-xl font-bold text-blue-400 hover:text-blue-300 transition flex items-center gap-2">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+                </svg>
+                Back to Showcase
+            </a>
+            <span class="text-sm text-zinc-400">Google Gemini 3.1 Pro</span>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="gradient-bg pt-24 pb-16 px-4">
+        <div class="max-w-4xl mx-auto text-center">
+            <div class="inline-flex items-center gap-2 px-4 py-2 bg-blue-500/10 border border-blue-500/30 rounded-full mb-6">
+                <span class="w-2 h-2 rounded-full bg-blue-500"></span>
+                <span class="text-sm text-blue-300 font-medium">Modern Architecture</span>
+            </div>
+            <h1 class="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-cyan-300 bg-clip-text text-transparent">
+                Gemini Implementation
+            </h1>
+            <p class="text-xl text-zinc-400 mb-8 max-w-2xl mx-auto">
+                A modern React-based implementation with TypeScript, demonstrating 
+                current web development best practices and modular architecture.
+            </p>
+            <div class="flex flex-wrap gap-4 justify-center text-sm">
+                <span class="px-4 py-2 bg-zinc-800 rounded-lg">React 18</span>
+                <span class="px-4 py-2 bg-zinc-800 rounded-lg">TypeScript</span>
+                <span class="px-4 py-2 bg-zinc-800 rounded-lg">Vite</span>
+                <span class="px-4 py-2 bg-zinc-800 rounded-lg">Tailwind CSS</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats -->
+    <section class="py-12 px-4 border-b border-zinc-800">
+        <div class="max-w-4xl mx-auto">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+                <div class="bg-zinc-800/50 rounded-xl p-6">
+                    <div class="text-3xl font-bold text-blue-400">10+</div>
+                    <div class="text-zinc-400 text-sm mt-1">Files</div>
+                </div>
+                <div class="bg-zinc-800/50 rounded-xl p-6">
+                    <div class="text-3xl font-bold text-blue-400">6</div>
+                    <div class="text-zinc-400 text-sm mt-1">Components</div>
+                </div>
+                <div class="bg-zinc-800/50 rounded-xl p-6">
+                    <div class="text-3xl font-bold text-blue-400">Modern</div>
+                    <div class="text-zinc-400 text-sm mt-1">Stack</div>
+                </div>
+                <div class="bg-zinc-800/50 rounded-xl p-6">
+                    <div class="text-3xl font-bold text-blue-400">Build</div>
+                    <div class="text-zinc-400 text-sm mt-1">Required</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="py-16 px-4">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-2xl font-bold mb-8 text-center">Key Features</h2>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-zinc-800/50 rounded-xl p-6 card-hover transition-all duration-300 border border-zinc-700">
+                    <div class="text-blue-400 text-2xl mb-3">⚛️</div>
+                    <h3 class="font-semibold mb-2">React 18 + TypeScript</h3>
+                    <p class="text-zinc-400 text-sm">
+                        Modern component-based architecture with full type safety and 
+                        excellent developer experience.
+                    </p>
+                </div>
+                <div class="bg-zinc-800/50 rounded-xl p-6 card-hover transition-all duration-300 border border-zinc-700">
+                    <div class="text-blue-400 text-2xl mb-3">⚡</div>
+                    <h3 class="font-semibold mb-2">Vite Build System</h3>
+                    <p class="text-zinc-400 text-sm">
+                        Lightning-fast development server and optimized production builds 
+                        with hot module replacement.
+                    </p>
+                </div>
+                <div class="bg-zinc-800/50 rounded-xl p-6 card-hover transition-all duration-300 border border-zinc-700">
+                    <div class="text-blue-400 text-2xl mb-3">🎨</div>
+                    <h3 class="font-semibold mb-2">Tailwind CSS</h3>
+                    <p class="text-zinc-400 text-sm">
+                        Utility-first CSS framework for rapid UI development with 
+                        consistent design tokens.
+                    </p>
+                </div>
+                <div class="bg-zinc-800/50 rounded-xl p-6 card-hover transition-all duration-300 border border-zinc-700">
+                    <div class="text-blue-400 text-2xl mb-3">📁</div>
+                    <h3 class="font-semibold mb-2">Modular Structure</h3>
+                    <p class="text-zinc-400 text-sm">
+                        Clean separation of concerns with dedicated components for 
+                        Hero, TrolleyProblem, Consequentialism, Deontology, and more.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Philosophy -->
+    <section class="py-16 px-4 bg-zinc-800/30">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-2xl font-bold mb-8 text-center">Philosophy Explored</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-zinc-800 rounded-xl p-6 border border-emerald-500/30">
+                    <h3 class="text-xl font-semibold text-emerald-400 mb-4">Consequentialism</h3>
+                    <p class="text-zinc-300 text-sm leading-relaxed">
+                        Actions judged by outcomes. The morally right action produces the 
+                        best overall results. Utilitarianism maximizes total happiness and 
+                        minimizes suffering for all affected.
+                    </p>
+                    <div class="mt-4 text-xs text-zinc-500">
+                        Key Thinkers: Bentham, Mill, Singer
+                    </div>
+                </div>
+                <div class="bg-zinc-800 rounded-xl p-6 border border-blue-500/30">
+                    <h3 class="text-xl font-semibold text-blue-400 mb-4">Deontology</h3>
+                    <p class="text-zinc-300 text-sm leading-relaxed">
+                        Morality grounded in duties and rules, not consequences. Kant's 
+                        Categorical Imperative: act only on principles that could become 
+                        universal laws, treat persons as ends in themselves.
+                    </p>
+                    <div class="mt-4 text-xs text-zinc-500">
+                        Key Thinkers: Kant, Ross, Korsgaard
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Code Structure -->
+    <section class="py-16 px-4">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-2xl font-bold mb-8 text-center">Code Structure</h2>
+            <div class="bg-zinc-900 rounded-xl p-6 font-mono text-sm overflow-x-auto border border-zinc-700">
+                <pre class="text-zinc-300"><code><span class="text-blue-400">Gemini/</span>
+├── <span class="text-yellow-400">src/</span>
+│   ├── <span class="text-green-400">App.tsx</span>          <span class="text-zinc-500"># Main app component</span>
+│   ├── <span class="text-green-400">main.tsx</span>        <span class="text-zinc-500"># Entry point</span>
+│   ├── <span class="text-green-400">index.css</span>      <span class="text-zinc-500"># Global styles</span>
+│   └── <span class="text-yellow-400">components/</span>
+│       ├── <span class="text-green-400">Hero.tsx</span>             <span class="text-zinc-500"># Landing hero</span>
+│       ├── <span class="text-green-400">TrolleyProblem.tsx</span>   <span class="text-zinc-500"># Interactive scenario</span>
+│       ├── <span class="text-green-400">Consequentialism.tsx</span> <span class="text-zinc-500"># Theory section</span>
+│       ├── <span class="text-green-400">Deontology.tsx</span>       <span class="text-zinc-500"># Theory section</span>
+│       ├── <span class="text-green-400">DesignPhilosophy.tsx</span> <span class="text-zinc-500"># UX approach</span>
+│       └── <span class="text-green-400">Bibliography.tsx</span>      <span class="text-zinc-500"># Sources</span>
+├── <span class="text-green-400">index.html</span>      <span class="text-zinc-500"># HTML entry</span>
+├── <span class="text-green-400">package.json</span>   <span class="text-zinc-500"># Dependencies</span>
+├── <span class="text-green-400">tsconfig.json</span>  <span class="text-zinc-500"># TypeScript config</span>
+└── <span class="text-green-400">vite.config.ts</span>  <span class="text-zinc-500"># Vite config</span></code></pre>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comparison -->
+    <section class="py-16 px-4 bg-zinc-800/30">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-2xl font-bold mb-8 text-center">Comparison with Other Implementations</h2>
+            <div class="overflow-x-auto">
+                <table class="w-full text-sm">
+                    <thead>
+                        <tr class="border-b border-zinc-700">
+                            <th class="text-left py-3 px-4 text-zinc-400 font-medium">Aspect</th>
+                            <th class="text-left py-3 px-4 text-blue-400 font-medium">Gemini</th>
+                            <th class="text-left py-3 px-4 text-emerald-400 font-medium">ChatGPT</th>
+                            <th class="text-left py-3 px-4 text-orange-400 font-medium">Claude</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-zinc-300">
+                        <tr class="border-b border-zinc-800">
+                            <td class="py-3 px-4">Architecture</td>
+                            <td class="py-3 px-4 text-blue-300">Component-based</td>
+                            <td class="py-3 px-4">Single file</td>
+                            <td class="py-3 px-4">Single file</td>
+                        </tr>
+                        <tr class="border-b border-zinc-800">
+                            <td class="py-3 px-4">Build Required</td>
+                            <td class="py-3 px-4 text-blue-300">Yes (Vite)</td>
+                            <td class="py-3 px-4">No</td>
+                            <td class="py-3 px-4">No</td>
+                        </tr>
+                        <tr class="border-b border-zinc-800">
+                            <td class="py-3 px-4">Type Safety</td>
+                            <td class="py-3 px-4 text-blue-300">TypeScript</td>
+                            <td class="py-3 px-4">None</td>
+                            <td class="py-3 px-4">None</td>
+                        </tr>
+                        <tr class="border-b border-zinc-800">
+                            <td class="py-3 px-4">Styling</td>
+                            <td class="py-3 px-4 text-blue-300">Tailwind</td>
+                            <td class="py-3 px-4">Tailwind CDN</td>
+                            <td class="py-3 px-4">Custom CSS</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4">Best For</td>
+                            <td class="py-3 px-4 text-blue-300">Production apps</td>
+                            <td class="py-3 px-4">Quick prototypes</td>
+                            <td class="py-3 px-4">Rich features</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- GitHub Link -->
+    <section class="py-16 px-4">
+        <div class="max-w-2xl mx-auto text-center">
+            <h2 class="text-2xl font-bold mb-4">View Source Code</h2>
+            <p class="text-zinc-400 mb-6">
+                This implementation uses React + TypeScript + Vite and requires a build step.
+                View the complete source code on GitHub.
+            </p>
+            <a href="https://github.com/baney75/Trolly-Problem---Gemini-3.1-Pro" 
+               target="_blank"
+               class="inline-flex items-center gap-2 px-6 py-3 bg-blue-500 hover:bg-blue-600 rounded-lg font-semibold transition">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
+                View on GitHub
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-zinc-800 py-8 px-4">
+        <div class="max-w-4xl mx-auto text-center text-zinc-500 text-sm">
+            <p class="mb-2">
+                <strong class="text-zinc-300">Citations:</strong> Chicago Manual of Style, 17th Edition
+            </p>
+            <p>
+                Chapman, Andrew. "Deontology: Kantian Ethics." <em>1000-Word Philosophy</em>. 2014.
+            </p>
+            <p>
+                Gronholz, Shane. "Consequentialism and Utilitarianism." <em>1000-Word Philosophy</em>. 2014.
+            </p>
+            <p class="mt-4 text-zinc-600">
+                AI Ethics Experiments • Educational Project • 2026
+            </p>
+        </div>
+    </footer>
+</body>
+</html>
