@@ -909,8 +909,8 @@
                 <a href="./Claude-showcase/">Claude</a>
                 <a href="./Gemini-showcase/">Gemini</a>
             </div>
-            <p class="copyright">
-                AI Ethics Experiments Showcase • Educational Project • 2026
+            <p class="copyright" id="copyright">
+                AI Ethics Experiments Showcase • Educational Project • <span id="year"></span>
             </p>
         </div>
     </footer>
@@ -939,6 +939,9 @@
                 nav.style.background = 'rgba(10, 10, 15, 0.8)';
             }
         });
+
+        // Dynamic year - always current
+        document.getElementById('year').textContent = new Date().getFullYear();
     </script>
 </body>
 </html>
