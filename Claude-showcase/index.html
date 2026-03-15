@@ -2290,12 +2290,55 @@
                 btnPull.className = "vote-btn";
                 btnNoPull.className = "vote-btn";
 
+                verdictText.textContent = "";
                 if (choice === "pull") {
                     btnPull.classList.add("active-c");
-                    verdictText.innerHTML = `<strong style="color:var(--electric)">Consequentialist verdict: PULL IT.</strong> Five lives saved outweigh one lost. Utilitarianism demands we maximize net well-being across all affected parties. As Shane Gronholz explains, "Consequentialists typically argue that we are obligated to do whatever action has the best overall consequences, for all who are affected by the action." Pulling the lever produces a better world — five grieving families prevented versus one.<br><br><em style="color:var(--muted)">Gronholz, "Consequentialism and Utilitarianism," 1000-Word Philosophy, 2014.</em>`;
+                    const strong = document.createElement("strong");
+                    strong.style.color = "var(--electric)";
+                    strong.textContent = "Consequentialist verdict: PULL IT.";
+                    verdictText.appendChild(strong);
+                    verdictText.appendChild(
+                        document.createTextNode(
+                            ' Five lives saved outweigh one lost. Utilitarianism demands we maximize net well-being across all affected parties. As Shane Gronholz explains, "Consequentialists typically argue that we are obligated to do whatever action has the best overall consequences, for all who are affected by the action." Pulling the lever produces a better world — five grieving families prevented versus one.',
+                        ),
+                    );
+                    verdictText.appendChild(document.createElement("br"));
+                    verdictText.appendChild(document.createElement("br"));
+                    const em = document.createElement("em");
+                    em.style.color = "var(--muted)";
+                    em.textContent =
+                        'Gronholz, "Consequentialism and Utilitarianism," 1000-Word Philosophy, 2014.';
+                    verdictText.appendChild(em);
                 } else {
                     btnNoPull.classList.add("active-d");
-                    verdictText.innerHTML = `<strong style="color:var(--neon)">Deontological verdict: complicated.</strong> Kant's framework requires asking whether you're treating people as ends in themselves. Pulling the lever redirects a threat — the one person's death is a tragic side effect, not your goal. Many Kantians actually <em>permit</em> pulling. But <strong>pushing a person</strong> onto the tracks is categorically different: you'd be using their body as an instrument, violating the Second Formulation. Chapman notes: "His death is an unfortunate and unintended consequence of our attempt to save five lives."<br><br><em style="color:var(--muted)">Chapman, "Deontology: Kantian Ethics," 1000-Word Philosophy, 2014.</em>`;
+                    const strong = document.createElement("strong");
+                    strong.style.color = "var(--neon)";
+                    strong.textContent = "Deontological verdict: complicated.";
+                    verdictText.appendChild(strong);
+                    verdictText.appendChild(
+                        document.createTextNode(
+                            " Kant's framework requires asking whether you're treating people as ends in themselves. Pulling the lever redirects a threat — the one person's death is a tragic side effect, not your goal. Many Kantians actually ",
+                        ),
+                    );
+                    const em1 = document.createElement("em");
+                    em1.textContent = "permit";
+                    verdictText.appendChild(em1);
+                    verdictText.appendChild(document.createTextNode(" pulling. But "));
+                    const st = document.createElement("strong");
+                    st.textContent = "pushing a person";
+                    verdictText.appendChild(st);
+                    verdictText.appendChild(
+                        document.createTextNode(
+                            ' onto the tracks is categorically different: you\'d be using their body as an instrument, violating the Second Formulation. Chapman notes: "His death is an unfortunate and unintended consequence of our attempt to save five lives."',
+                        ),
+                    );
+                    verdictText.appendChild(document.createElement("br"));
+                    verdictText.appendChild(document.createElement("br"));
+                    const em2 = document.createElement("em");
+                    em2.style.color = "var(--muted)";
+                    em2.textContent =
+                        'Chapman, "Deontology: Kantian Ethics," 1000-Word Philosophy, 2014.';
+                    verdictText.appendChild(em2);
                 }
                 verdict.classList.add("show");
                 runTrolleyChoice(choice === "pull");
@@ -2514,35 +2557,72 @@
                     `${(scenarioScore / scenarios.length) * 100}%`;
 
                 const answered = scenarioAnswered[currentScenario];
-                const choicesHTML = s.choices
-                    .map((c, i) => {
-                        let cls = "choice-btn";
-                        if (answered) {
-                            cls += c.correct ? " picked-c" : " wrong";
-                        }
-                        return `<button class="${cls}" onclick="answerScenario(${i})" ${answered ? "disabled" : ""}>
-      <span class="choice-tag ${c.label}">${c.tag}</span>
-      <span class="choice-text">${c.text}</span>
-    </button>`;
-                    })
-                    .join("");
+                const scenarioContent = document.getElementById("scenarioContent");
+                scenarioContent.textContent = "";
 
-                const revealHTML = answered
-                    ? `
-    <div class="scenario-reveal show">
-      <div class="reveal-heading">
-        <span class="dot dot-c"></span> Analysis
-      </div>
-      <div class="reveal-text">${s.reveal}<br><br><em style="color:var(--muted); font-size:0.82rem;">${s.cite}</em></div>
-    </div>`
-                    : `<div class="scenario-reveal" id="revealBox"></div>`;
+                const h3 = document.createElement("h3");
+                h3.className = "scenario-title";
+                h3.textContent = s.title;
+                scenarioContent.appendChild(h3);
 
-                document.getElementById("scenarioContent").innerHTML = `
-    <h3 class="scenario-title">${s.title}</h3>
-    <p class="scenario-text">${s.text}</p>
-    <div class="scenario-choices">${choicesHTML}</div>
-    ${revealHTML}
-  `;
+                const p = document.createElement("p");
+                p.className = "scenario-text";
+                p.textContent = s.text;
+                scenarioContent.appendChild(p);
+
+                const choicesDiv = document.createElement("div");
+                choicesDiv.className = "scenario-choices";
+                s.choices.forEach((c, i) => {
+                    const btn = document.createElement("button");
+                    let cls = "choice-btn";
+                    if (answered) {
+                        cls += c.correct ? " picked-c" : " wrong";
+                    }
+                    btn.className = cls;
+                    btn.onclick = () => answerScenario(i);
+                    if (answered) btn.disabled = true;
+
+                    const tag = document.createElement("span");
+                    tag.className = `choice-tag ${c.label}`;
+                    tag.textContent = c.tag;
+                    btn.appendChild(tag);
+
+                    const text = document.createElement("span");
+                    text.className = "choice-text";
+                    text.textContent = c.text;
+                    btn.appendChild(text);
+
+                    choicesDiv.appendChild(btn);
+                });
+                scenarioContent.appendChild(choicesDiv);
+
+                const revealBox = document.createElement("div");
+                if (answered) {
+                    revealBox.className = "scenario-reveal show";
+                    const heading = document.createElement("div");
+                    heading.className = "reveal-heading";
+                    const dot = document.createElement("span");
+                    dot.className = "dot dot-c";
+                    heading.appendChild(dot);
+                    heading.appendChild(document.createTextNode(" Analysis"));
+                    revealBox.appendChild(heading);
+
+                    const text = document.createElement("div");
+                    text.className = "reveal-text";
+                    text.innerHTML = s.reveal; // s.reveal contains <em> tags
+                    text.appendChild(document.createElement("br"));
+                    text.appendChild(document.createElement("br"));
+                    const cite = document.createElement("em");
+                    cite.style.color = "var(--muted)";
+                    cite.style.fontSize = "0.82rem";
+                    cite.textContent = s.cite;
+                    text.appendChild(cite);
+                    revealBox.appendChild(text);
+                } else {
+                    revealBox.className = "scenario-reveal";
+                    revealBox.id = "revealBox";
+                }
+                scenarioContent.appendChild(revealBox);
             }
 
             function answerScenario(choiceIdx) {
@@ -2637,15 +2717,31 @@
             accordionItems.forEach((item, i) => {
                 const div = document.createElement("div");
                 div.className = "accordion-item reveal";
-                div.innerHTML = `
-    <button class="accordion-trigger" onclick="toggleAccordion(${i})">
-      <span>${item.title}</span>
-      <span class="accordion-icon">+</span>
-    </button>
-    <div class="accordion-content">
-      <div class="accordion-inner">${item.body}</div>
-    </div>
-  `;
+
+                const button = document.createElement("button");
+                button.className = "accordion-trigger";
+                button.onclick = () => toggleAccordion(i);
+
+                const spanTitle = document.createElement("span");
+                spanTitle.textContent = item.title;
+                button.appendChild(spanTitle);
+
+                const spanIcon = document.createElement("span");
+                spanIcon.className = "accordion-icon";
+                spanIcon.textContent = "+";
+                button.appendChild(spanIcon);
+
+                div.appendChild(button);
+
+                const content = document.createElement("div");
+                content.className = "accordion-content";
+                const inner = document.createElement("div");
+                inner.className = "accordion-inner";
+                inner.innerHTML = item.body; // item.body contains complex HTML
+                content.appendChild(inner);
+
+                div.appendChild(content);
+
                 accordionEl.appendChild(div);
                 observer.observe(div);
             });
@@ -2752,12 +2848,12 @@
 
             function buildQuizDots() {
                 const dots = document.getElementById("quizDots");
-                dots.innerHTML = quizData
-                    .map(
-                        (_, i) =>
-                            `<div class="qdot${i === 0 ? " current" : ""}"></div>`,
-                    )
-                    .join("");
+                dots.textContent = "";
+                quizData.forEach((_, i) => {
+                    const dot = document.createElement("div");
+                    dot.className = i === 0 ? "qdot current" : "qdot";
+                    dots.appendChild(dot);
+                });
             }
 
             function renderQuiz() {
@@ -2766,27 +2862,54 @@
                 document.getElementById("quizBgText").textContent =
                     `${currentQ + 1}`;
                 answered = false;
-                area.innerHTML = `
-    <div class="quiz-q">${q.q}</div>
-    <div class="quiz-options">
-      ${q.opts
-          .map(
-              (opt, i) => `
-        <button class="qopt" onclick="answerQuiz(${i})">
-          <span class="qopt-letter">${"ABCD"[i]}</span>
-          <span class="qopt-text">${opt}</span>
-        </button>
-      `,
-          )
-          .join("")}
-    </div>
-    <div class="quiz-feedback" id="qfeedback">
-      <div class="quiz-feedback-text" id="qfeedbackText"></div>
-    </div>
-    <button class="quiz-next" id="qnext" onclick="nextQuestion()">
-      ${currentQ < quizData.length - 1 ? "Next Question →" : "See Results →"}
-    </button>
-  `;
+
+                area.textContent = "";
+
+                const qDiv = document.createElement("div");
+                qDiv.className = "quiz-q";
+                qDiv.textContent = q.q;
+                area.appendChild(qDiv);
+
+                const optionsDiv = document.createElement("div");
+                optionsDiv.className = "quiz-options";
+                q.opts.forEach((opt, i) => {
+                    const btn = document.createElement("button");
+                    btn.className = "qopt";
+                    btn.onclick = () => answerQuiz(i);
+
+                    const letter = document.createElement("span");
+                    letter.className = "qopt-letter";
+                    letter.textContent = "ABCD"[i];
+                    btn.appendChild(letter);
+
+                    const text = document.createElement("span");
+                    text.className = "qopt-text";
+                    text.textContent = opt;
+                    btn.appendChild(text);
+
+                    optionsDiv.appendChild(btn);
+                });
+                area.appendChild(optionsDiv);
+
+                const feedbackDiv = document.createElement("div");
+                feedbackDiv.className = "quiz-feedback";
+                feedbackDiv.id = "qfeedback";
+                const feedbackText = document.createElement("div");
+                feedbackText.className = "quiz-feedback-text";
+                feedbackText.id = "qfeedbackText";
+                feedbackDiv.appendChild(feedbackText);
+                area.appendChild(feedbackDiv);
+
+                const nextBtn = document.createElement("button");
+                nextBtn.className = "quiz-next";
+                nextBtn.id = "qnext";
+                nextBtn.onclick = nextQuestion;
+                nextBtn.textContent =
+                    currentQ < quizData.length - 1
+                        ? "Next Question →"
+                        : "See Results →";
+                area.appendChild(nextBtn);
+
                 updateDots();
             }
 
