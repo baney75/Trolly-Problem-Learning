@@ -1,0 +1,21 @@
+{
+  "name": "app",
+  "version": "1.0.0",
+  "description": "A comprehensive comparison showcase of how different AI models (ChatGPT, Claude, and Gemini) approach the same creative coding task: building an interactive philosophy application about the Trolley Problem.",
+  "main": "index.js",
+  "scripts": {
+    "test": "python3 Claude-showcase/tests/test_accordion.py"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/baney75/Trolly-Problem-Learning.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/baney75/Trolly-Problem-Learning/issues"
+  },
+  "homepage": "https://github.com/baney75/Trolly-Problem-Learning#readme"
+}
