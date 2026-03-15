@@ -212,6 +212,9 @@
         </section>
 
         <script>
+            const resultElement = document.getElementById("result");
+            const quizResultElement = document.getElementById("quizresult");
+
             function showTheory(type) {
                 if (type == "cons") {
                     alert(
@@ -227,29 +230,25 @@
             }
 
             function choose(choice) {
-                let result = document.getElementById("result");
-
                 if (choice == "pull") {
-                    result.innerHTML =
+                    resultElement.innerHTML =
                         "A consequentialist would likely say pulling the lever is morally right because it saves more lives.";
                 }
 
                 if (choice == "nothing") {
-                    result.innerHTML =
+                    resultElement.innerHTML =
                         "Some deontologists might argue you are not responsible for actively causing a death.";
                 }
             }
 
             function quiz(answer) {
-                let result = document.getElementById("quizresult");
-
                 if (answer == "yes") {
-                    result.innerHTML =
+                    quizResultElement.innerHTML =
                         "Consequentialists often allow lying if it produces better outcomes.";
                 }
 
                 if (answer == "no") {
-                    result.innerHTML =
+                    quizResultElement.innerHTML =
                         "Kant argued that lying violates the categorical imperative because it manipulates others.";
                 }
             }
