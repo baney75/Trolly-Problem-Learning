@@ -213,13 +213,13 @@
 
         <script>
             function showTheory(type) {
-                if (type == "cons") {
+                if (type === "cons") {
                     alert(
                         "Consequentialism evaluates actions based on their outcomes. The morally right choice produces the best overall consequences.",
                     );
                 }
 
-                if (type == "deon") {
+                if (type === "deon") {
                     alert(
                         "Kantian ethics evaluates actions based on duty and universal moral rules rather than consequences.",
                     );
@@ -229,12 +229,12 @@
             function choose(choice) {
                 let result = document.getElementById("result");
 
-                if (choice == "pull") {
+                if (choice === "pull") {
                     result.innerHTML =
                         "A consequentialist would likely say pulling the lever is morally right because it saves more lives.";
                 }
 
-                if (choice == "nothing") {
+                if (choice === "nothing") {
                     result.innerHTML =
                         "Some deontologists might argue you are not responsible for actively causing a death.";
                 }
@@ -243,12 +243,12 @@
             function quiz(answer) {
                 let result = document.getElementById("quizresult");
 
-                if (answer == "yes") {
+                if (answer === "yes") {
                     result.innerHTML =
                         "Consequentialists often allow lying if it produces better outcomes.";
                 }
 
-                if (answer == "no") {
+                if (answer === "no") {
                     result.innerHTML =
                         "Kant argued that lying violates the categorical imperative because it manipulates others.";
                 }
